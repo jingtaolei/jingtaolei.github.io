@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jingtao Lei — Applied Mathematics undergraduate working on multimodal learning, video diffusion models, world models, and representation learning." />
+  <meta name="author" content="Jingtao Lei" />
+  <meta property="og:title" content="Jingtao Lei | AI Research" />
+  <meta property="og:description" content="Academic homepage of Jingtao Lei: multimodal learning, video diffusion, world models, and representation learning." />
+  <meta property="og:type" content="website" />
+  <title>Jingtao Lei | AI Research</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="shell nav-wrap">
+      <a class="brand" href="#top" aria-label="Jingtao Lei homepage">Jingtao Lei</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#manuscript">Manuscript</a>
+        <a href="#skills">Skills</a>
+        <a href="#awards">Awards</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Applied Mathematics · AI Research</p>
+          <h1>Jingtao Lei</h1>
+          <p class="hero-lead">
+            Undergraduate researcher exploring how multimodal and generative models can move
+            beyond visual generation toward richer representations of the physical world.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="assets/cv/Jingtao_Lei_CV.pdf">View CV</a>
+            <a class="button" href="https://github.com/AoiHKR" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="button" href="mailto:2617549@dundee.ac.uk">Email</a>
+          </div>
+          <div class="research-tags" aria-label="Research interests">
+            <span>Multimodal Learning</span>
+            <span>Video Diffusion</span>
+            <span>World Models</span>
+            <span>Representation Learning</span>
+            <span>Adaptive Computation</span>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Current profile summary">
+          <div class="summary-row">
+            <span class="summary-label">Institution</span>
+            <strong>Central South University</strong>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Programme</span>
+            <strong>B.Sc. Applied Mathematics</strong>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Graduation</span>
+            <strong>June 2028 (expected)</strong>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Current average</span>
+            <strong>87.74 / 100</strong>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Current research</span>
+            <strong>Video diffusion → world models</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="shell two-col">
+        <div>
+          <p class="section-kicker">About</p>
+          <h2>Research at the intersection of multimodality, generation, and physical reasoning.</h2>
+        </div>
+        <div class="prose">
+          <p>
+            I am an Applied Mathematics undergraduate at Central South University with hands-on
+            research experience in multimodal learning and video diffusion models.
+          </p>
+          <p>
+            My current work investigates whether pretrained video diffusion models encode usable
+            physical dynamics, and how those internal representations might support future
+            world-model capabilities. Previously, I developed a sample-wise dynamic prompt
+            truncation mechanism for parameter-efficient multimodal learning.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="research">
+      <div class="shell">
+        <p class="section-kicker">Selected Research</p>
+        <h2>Current and recent projects</h2>
+
+        <article class="research-card">
+          <div class="research-meta">
+            <span class="pill">Jun 2026 – Present</span>
+            <span>CUHK · Computer Science & Engineering</span>
+          </div>
+          <h3>Video Diffusion Models toward World-Model Capabilities</h3>
+          <p class="supervisor">Supervisor: Prof. Shengchao Liu</p>
+          <p>
+            I investigate whether pretrained video diffusion models encode usable physical dynamics,
+            with the broader goal of extending visual generative models toward world-model
+            capabilities for prediction and physical reasoning.
+          </p>
+          <ul>
+            <li>
+              Built controlled motion and two-object interaction benchmarks and a reproducible
+              <strong>CogVideoX-2B</strong> representation-analysis pipeline.
+            </li>
+            <li>
+              Mapped direction, speed, optical flow, and contact information across Transformer
+              layers, diffusion noise levels, and readout strategies using linear probes,
+              ID/OOD evaluation, and negative controls.
+            </li>
+            <li>
+              Best controlled ID results reached approximately <strong>1.09° direction error</strong>
+              and <strong>R² = 0.988</strong> for speed.
+            </li>
+            <li>
+              Designed representation-level interventions to test whether decodable physical
+              information is merely present or functionally used by the model.
+            </li>
+          </ul>
+        </article>
+
+        <article class="research-card">
+          <div class="research-meta">
+            <span class="pill">Jan 2026 – Jul 2026</span>
+            <span>Multimodal Learning Research Project</span>
+          </div>
+          <h3>Sample-Wise Dynamic Prompt Truncation for Multimodal Learning</h3>
+          <p class="supervisor">Supervisor: Prof. David P. Woodruff</p>
+          <p>
+            I studied whether prompt length can be treated as an adaptive resource in
+            parameter-efficient multimodal learning instead of assigning every sample the same
+            fixed prompt budget.
+          </p>
+          <ul>
+            <li>
+              Extended a ViT-based <strong>Mixture of Prompt Experts (MoPE)</strong> classifier
+              with a layer-wise gating mechanism that dynamically determines retained visual prompt length.
+            </li>
+            <li>
+              Adapted the framework to a derived IU X-Ray chest X-ray classification task and
+              implemented controlled fixed-versus-adaptive prompting experiments.
+            </li>
+            <li>
+              In the recorded experiment, reduced the effective visual prompt budget from
+              <strong>six tokens to one</strong> while maintaining validation performance.
+            </li>
+            <li>
+              Best validation accuracy increased from <strong>0.8969 to 0.8996</strong>;
+              final validation accuracy increased from <strong>0.8802 to 0.8963</strong>.
+            </li>
+          </ul>
+          <div class="card-actions">
+            <a href="https://github.com/AoiHKR/mope-dynamic-prompt-truncation" target="_blank" rel="noreferrer">
+              View project code →
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="manuscript">
+      <div class="shell">
+        <p class="section-kicker">Manuscript</p>
+        <h2>Work in preparation</h2>
+        <article class="publication">
+          <p class="pub-status">Manuscript in preparation · 2026</p>
+          <h3>Sample-Wise Dynamic Prompt Truncation in a MoPE-Style Multimodal Classifier for Chest X-Ray Classification</h3>
+          <p><strong>Jingtao Lei</strong>, Hongji Li, Dexiang Shu</p>
+          <a href="https://github.com/AoiHKR/mope-dynamic-prompt-truncation" target="_blank" rel="noreferrer">
+            Code and experiment repository →
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-tint" id="skills">
+      <div class="shell">
+        <p class="section-kicker">Technical Skills</p>
+        <h2>Research toolkit</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>Machine Learning</h3>
+            <p>PyTorch, Hugging Face Transformers & Diffusers, Vision Transformers, multimodal learning, prompt tuning, diffusion and video diffusion models.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Research Methods</h3>
+            <p>Controlled dataset construction, representation probing, intermediate-feature analysis, ID/OOD evaluation, negative controls, ablations, and representation interventions.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Systems & HPC</h3>
+            <p>Linux, SSH-based remote development, Git, Slurm, Singularity, and GPU/HPC workflows, including NVIDIA H200 clusters.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Scientific Computing</h3>
+            <p>Python, Bash, NumPy, pandas, and Matplotlib.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="awards">
+      <div class="shell">
+        <p class="section-kicker">Awards & Academic Achievements</p>
+        <h2>Selected achievements</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-mark"></span>
+            <div>
+              <h3>First Prize</h3>
+              <p>21st Central South University Mathematical Modeling Competition and Internal Selection for the National Competition.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-mark"></span>
+            <div>
+              <h3>Third Prize</h3>
+              <p>Annual Comprehensive Student Evaluation Award, Central South University.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-mark"></span>
+            <div>
+              <h3>97.80 / 100 (A+)</h3>
+              <p><em>From Combinatorics to Calculus</em>, taught by Prof. Dan Ciubotaru, University of Oxford.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-mark"></span>
+            <div>
+              <h3>AWS Academy Graduate</h3>
+              <p>Cloud Foundations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="shell contact-grid">
+        <div>
+          <p class="section-kicker">Contact</p>
+          <h2>Research conversations are welcome.</h2>
+          <p>
+            I am especially interested in opportunities involving multimodal learning, video models,
+            world models, embodied AI, and representation learning.
+          </p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:2617549@dundee.ac.uk">
+            <span>Email</span>
+            <strong>2617549@dundee.ac.uk</strong>
+          </a>
+          <a href="https://github.com/AoiHKR" target="_blank" rel="noreferrer">
+            <span>GitHub</span>
+            <strong>AoiHKR</strong>
+          </a>
+          <a href="assets/cv/Jingtao_Lei_CV.pdf">
+            <span>Curriculum Vitae</span>
+            <strong>View PDF</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-wrap">
+      <span>© 2026 Jingtao Lei</span>
+      <span>Built as a lightweight academic site with GitHub Pages.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
