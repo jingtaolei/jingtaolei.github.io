@@ -1,56 +1,19 @@
-# Jingtao Lei — Academic Personal Website
+# Jingtao Lei
 
-This repository is ready to deploy with **GitHub Pages**.
+This repository contains the source code for my personal academic website:
 
-## Recommended repository name
+**https://jingtaolei.github.io**
 
-Create a public repository named:
+I am an Applied Mathematics undergraduate at Central South University, studying in the Dundee International Institute through a dual-degree programme with the University of Dundee.
 
-```text
-AoiHKR.github.io
-```
+My current research interests are mainly in **multimodal learning, generative models, video diffusion models, and world models**. I am particularly interested in how vision and video can give AI systems richer perception of the physical world, and how generative models can move beyond producing content for people toward learning representations that support prediction, reasoning, and eventually interaction with the world.
 
-Then upload the contents of this folder to the repository root.
+My recent research includes:
 
-## Publish with GitHub Pages
+- studying physical dynamics representations in **CogVideoX-2B** and exploring how video diffusion models could be extended toward world-model capabilities;
+- developing a **sample-wise dynamic prompt truncation** method for parameter-efficient multimodal learning.
 
-1. Open the repository on GitHub.
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select:
-   - Branch: `main`
-   - Folder: `/ (root)`
-5. Save.
+The website includes a summary of my research experience, current manuscript, technical background, awards, and CV.
 
-Your site should then be available at:
-
-```text
-https://aoihkr.github.io
-```
-
-## Files
-
-- `index.html` — homepage and all academic content
-- `styles.css` — responsive academic styling
-- `script.js` — mobile navigation only
-- `favicon.svg` — simple JL favicon
-- `assets/cv/Jingtao_Lei_CV.pdf` — downloadable CV
-
-## Updating the website
-
-Most content can be edited directly in `index.html`.
-
-Useful sections:
-
-- `#about`
-- `#research`
-- `#manuscript`
-- `#skills`
-- `#awards`
-- `#contact`
-
-## Notes
-
-The current manuscript is deliberately labelled **“Manuscript in preparation”** rather than submitted or under review.
-
-The site uses no external frameworks or tracking scripts. It is fully static and should work directly on GitHub Pages.
+For academic or research-related communication, please contact me at **2617549@dundee.ac.uk**.  
+For general communication, you can also reach me at **leijingtao2005@gmail.com**.
