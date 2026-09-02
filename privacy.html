@@ -44,8 +44,11 @@
 
       <h2>Optional analytics: Google Analytics 4 and Microsoft Clarity</h2>
       <p>
-        Google Analytics 4 (GA4) and Microsoft Clarity are optional. On this site, their scripts are loaded
-        only after a visitor chooses <strong>Accept analytics</strong> in the analytics banner.
+        Google Analytics 4 (GA4) uses Google's consent mode. The Google tag may load when the page opens,
+        but analytics storage and all advertising-related storage are denied by default unless a visitor
+        chooses <strong>Accept analytics</strong>. Before consent, GA4 may send limited cookieless measurement
+        signals without setting Analytics cookies. Microsoft Clarity is loaded only after a visitor chooses
+        <strong>Accept analytics</strong>.
       </p>
       <ul>
         <li><strong>Google Analytics 4</strong> is used to measure page visits and selected interactions, such as visits to major sections and clicks on the CV, GitHub profile, project code, and contact links.</li>
@@ -63,7 +66,8 @@
       <p>
         You can accept or reject optional analytics. Your choice is stored locally in your browser under
         <code>analytics_consent</code> so the site can remember it on later visits. If you reject optional analytics,
-        GA4 and Clarity are not loaded by this site. You can change your choice at any time using
+        GA4 remains in consent-denied mode without Analytics cookies, while Microsoft Clarity is not loaded.
+        You can change your choice at any time using
         <strong>Analytics preferences</strong> in the footer.
       </p>
 
@@ -97,7 +101,7 @@
       <div class="consent-copy">
         <strong id="consent-title">Analytics &amp; Privacy</strong>
         <p id="consent-description">
-          This site uses optional Google Analytics and Microsoft Clarity to understand how visitors use the site.
+          This site uses Google Analytics with consent controls and optional Microsoft Clarity to understand how visitors use the site.
           You can accept or reject non-essential analytics.
         </p>
       </div>

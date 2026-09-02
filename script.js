@@ -15,15 +15,17 @@ if (toggle && nav) {
   });
 }
 
-// Optional analytics are loaded only after an explicit opt-in.
-// Cloudflare Web Analytics remains separate because it is cookie-free and
-// does not collect/use visitors' personal data according to Cloudflare.
+// Analytics architecture:
+// - Cloudflare Web Analytics runs independently (cookie-free).
+// - GA4 uses Advanced Consent Mode: the Google tag loads on every page view,
+//   but analytics/ad storage are denied unless the visitor has opted in.
+// - Microsoft Clarity loads only after an explicit opt-in.
 const ANALYTICS_CONSENT_KEY = 'analytics_consent';
 const GA_MEASUREMENT_ID = 'G-N79HTK8MHH';
 const CLARITY_PROJECT_ID = 'ybtnl0rk7v';
 
 const consentBanner = document.getElementById('analytics-consent');
-let analyticsLoaded = false;
+let analyticsGranted = false;
 let sectionObserverStarted = false;
 
 function getConsentChoice() {
@@ -61,24 +63,22 @@ function ensureGtagQueue() {
   window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
 }
 
-function loadGoogleAnalytics() {
+function initializeGoogleAnalytics(initialChoice) {
   if (document.querySelector('script[data-ga-loader]')) return;
 
   ensureGtagQueue();
 
-  // Basic consent mode: Google Analytics is not loaded before opt-in.
+  // Advanced Consent Mode. A returning visitor who previously opted in can
+  // start with analytics_storage granted; all other visitors start denied.
+  const analyticsStorage = initialChoice === 'granted' ? 'granted' : 'denied';
   window.gtag('consent', 'default', {
     ad_storage: 'denied',
     ad_user_data: 'denied',
     ad_personalization: 'denied',
-    analytics_storage: 'denied'
+    analytics_storage: analyticsStorage,
+    wait_for_update: 500
   });
-  window.gtag('consent', 'update', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: 'granted'
-  });
+
   window.gtag('js', new Date());
   window.gtag('config', GA_MEASUREMENT_ID, {
     anonymize_ip: true
@@ -89,6 +89,16 @@ function loadGoogleAnalytics() {
   gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
   gaScript.dataset.gaLoader = 'true';
   document.head.appendChild(gaScript);
+}
+
+function updateGoogleConsent(choice) {
+  ensureGtagQueue();
+  window.gtag('consent', 'update', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: choice === 'granted' ? 'granted' : 'denied'
+  });
 }
 
 function loadMicrosoftClarity() {
@@ -113,7 +123,8 @@ function loadMicrosoftClarity() {
 }
 
 function trackEvent(eventName, params = {}) {
-  if (!analyticsLoaded || typeof window.gtag !== 'function') return;
+  // Custom interaction events are sent only after explicit analytics opt-in.
+  if (!analyticsGranted || typeof window.gtag !== 'function') return;
   window.gtag('event', eventName, params);
 }
 
@@ -141,26 +152,17 @@ function startSectionViewTracking() {
 }
 
 function enableAnalytics() {
-  if (analyticsLoaded) return;
-  analyticsLoaded = true;
-  loadGoogleAnalytics();
+  if (analyticsGranted) return;
+  analyticsGranted = true;
+  updateGoogleConsent('granted');
   loadMicrosoftClarity();
   startSectionViewTracking();
 }
 
-function disableLoadedAnalyticsAndReloadIfNeeded() {
-  const hadLoadedAnalytics = analyticsLoaded || Boolean(
-    document.querySelector('script[data-ga-loader], script[data-clarity-loader]')
-  );
+function disableAnalyticsAndReloadIfNeeded() {
+  const clarityWasLoaded = Boolean(document.querySelector('script[data-clarity-loader]'));
 
-  if (typeof window.gtag === 'function') {
-    window.gtag('consent', 'update', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied'
-    });
-  }
+  updateGoogleConsent('denied');
 
   if (typeof window.clarity === 'function') {
     window.clarity('consentv2', {
@@ -169,10 +171,11 @@ function disableLoadedAnalyticsAndReloadIfNeeded() {
     });
   }
 
-  analyticsLoaded = false;
+  analyticsGranted = false;
 
-  // Reload so optional analytics scripts are no longer present in the page.
-  if (hadLoadedAnalytics) window.location.reload();
+  // If Clarity was already loaded, reload so its recording script is removed.
+  // GA4 remains present after reload in consent-denied mode by design.
+  if (clarityWasLoaded) window.location.reload();
 }
 
 function applyConsent(choice) {
@@ -182,7 +185,7 @@ function applyConsent(choice) {
   if (choice === 'granted') {
     enableAnalytics();
   } else {
-    disableLoadedAnalyticsAndReloadIfNeeded();
+    disableAnalyticsAndReloadIfNeeded();
   }
 }
 
@@ -215,8 +218,14 @@ document.querySelectorAll('[data-open-consent]').forEach(button => {
 });
 
 const initialConsent = getConsentChoice();
+
+// Load the Google tag immediately with the correct consent default.
+initializeGoogleAnalytics(initialConsent);
+
 if (initialConsent === 'granted') {
-  enableAnalytics();
+  analyticsGranted = true;
+  loadMicrosoftClarity();
+  startSectionViewTracking();
 } else if (initialConsent !== 'denied') {
   showConsentBanner();
 }
