@@ -187,13 +187,22 @@ function applyConsent(choice) {
 }
 
 // Explicit click events useful for an academic homepage.
+// Never send email addresses (including mailto: URLs or visible email text) to GA4.
 document.querySelectorAll('[data-analytics-event]').forEach(link => {
   link.addEventListener('click', () => {
-    trackEvent(link.dataset.analyticsEvent, {
-      link_url: link.href || '',
-      link_text: (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 120),
+    const params = {
       link_location: link.dataset.analyticsLocation || 'site'
-    });
+    };
+
+    const href = link.getAttribute('href') || '';
+    const isEmailLink = href.trim().toLowerCase().startsWith('mailto:');
+
+    if (!isEmailLink) {
+      params.link_url = link.href || '';
+      params.link_text = (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 120);
+    }
+
+    trackEvent(link.dataset.analyticsEvent, params);
   });
 });
 
