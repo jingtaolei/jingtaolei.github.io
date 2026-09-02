@@ -11,6 +11,37 @@
   <title>Jingtao Lei | AI Research</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
+  <!-- Google Analytics 4 + Consent Mode bootstrap.
+       The tag is present in <head> for reliable detection, but automatic page_view is disabled.
+       Detailed GA4 page-view and custom interaction events are sent only after analytics consent. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
+
+    (function () {
+      let initialAnalyticsConsent = null;
+      try {
+        initialAnalyticsConsent = localStorage.getItem('analytics_consent');
+      } catch (_) {
+        initialAnalyticsConsent = null;
+      }
+
+      window.__initialAnalyticsConsent = initialAnalyticsConsent;
+      window.__gaPageViewSent = false;
+
+      window.gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: initialAnalyticsConsent === 'granted' ? 'granted' : 'denied'
+      });
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-N79HTK8MHH', {
+        send_page_view: false
+      });
+    })();
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N79HTK8MHH" data-ga-loader="true"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>

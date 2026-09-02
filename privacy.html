@@ -8,6 +8,37 @@
   <title>Privacy | Jingtao Lei</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
+  <!-- Google Analytics 4 + Consent Mode bootstrap.
+       The tag is present in <head> for reliable detection, but automatic page_view is disabled.
+       Detailed GA4 page-view and custom interaction events are sent only after analytics consent. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
+
+    (function () {
+      let initialAnalyticsConsent = null;
+      try {
+        initialAnalyticsConsent = localStorage.getItem('analytics_consent');
+      } catch (_) {
+        initialAnalyticsConsent = null;
+      }
+
+      window.__initialAnalyticsConsent = initialAnalyticsConsent;
+      window.__gaPageViewSent = false;
+
+      window.gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: initialAnalyticsConsent === 'granted' ? 'granted' : 'denied'
+      });
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-N79HTK8MHH', {
+        send_page_view: false
+      });
+    })();
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N79HTK8MHH" data-ga-loader="true"></script>
 </head>
 <body>
   <header class="site-header">
@@ -44,10 +75,11 @@
 
       <h2>Optional analytics: Google Analytics 4 and Microsoft Clarity</h2>
       <p>
-        Google Analytics 4 (GA4) uses Google's consent mode. The Google tag may load when the page opens,
-        but analytics storage and all advertising-related storage are denied by default unless a visitor
-        chooses <strong>Accept analytics</strong>. Before consent, GA4 may send limited cookieless measurement
-        signals without setting Analytics cookies. Microsoft Clarity is loaded only after a visitor chooses
+        Google Analytics 4 (GA4) uses Google's consent mode. The Google tag loads in the page head so that
+        consent state can be handled reliably, but analytics storage and all advertising-related storage are
+        denied unless a visitor chooses <strong>Accept analytics</strong>. This site disables GA4's automatic
+        page view and does not intentionally send detailed GA4 page-view or custom interaction events until
+        analytics consent has been granted. Microsoft Clarity is loaded only after a visitor chooses
         <strong>Accept analytics</strong>.
       </p>
       <ul>
@@ -66,7 +98,7 @@
       <p>
         You can accept or reject optional analytics. Your choice is stored locally in your browser under
         <code>analytics_consent</code> so the site can remember it on later visits. If you reject optional analytics,
-        GA4 remains in consent-denied mode without Analytics cookies, while Microsoft Clarity is not loaded.
+        GA4 remains in consent-denied mode without Analytics cookies or detailed site-interaction events, while Microsoft Clarity is not loaded.
         You can change your choice at any time using
         <strong>Analytics preferences</strong> in the footer.
       </p>

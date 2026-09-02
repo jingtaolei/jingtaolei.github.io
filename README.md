@@ -21,4 +21,4 @@ For general communication, you can also reach me at **leijingtao2005@gmail.com**
 
 ## Analytics and privacy
 
-The site uses Cloudflare Web Analytics for privacy-first aggregate traffic measurement. Optional Google Analytics 4 and Microsoft Clarity integrations are gated behind an explicit analytics-consent banner. A visitor's choice is remembered locally and can be changed through the footer. See `privacy.html` for the public disclosure.
+The site uses Cloudflare Web Analytics for privacy-first aggregate traffic measurement. Google Analytics 4 is bootstrapped with Consent Mode and automatic page-view collection disabled; detailed GA4 page-view and custom interaction events are sent only after explicit analytics consent. Microsoft Clarity is loaded only after consent. A visitor's choice is remembered locally and can be changed through the footer. See `privacy.html` for the public disclosure.

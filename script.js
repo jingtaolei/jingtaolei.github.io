@@ -17,11 +17,11 @@ if (toggle && nav) {
 
 // Analytics architecture:
 // - Cloudflare Web Analytics runs independently (cookie-free).
-// - GA4 uses Advanced Consent Mode: the Google tag loads on every page view,
-//   but analytics/ad storage are denied unless the visitor has opted in.
-// - Microsoft Clarity loads only after an explicit opt-in.
+// - The GA4 tag is bootstrapped in <head> with Consent Mode and automatic
+//   page_view disabled. Detailed GA4 page-view/custom events are sent only
+//   after explicit analytics opt-in.
+// - Microsoft Clarity loads only after explicit opt-in.
 const ANALYTICS_CONSENT_KEY = 'analytics_consent';
-const GA_MEASUREMENT_ID = 'G-N79HTK8MHH';
 const CLARITY_PROJECT_ID = 'ybtnl0rk7v';
 
 const consentBanner = document.getElementById('analytics-consent');
@@ -29,6 +29,9 @@ let analyticsGranted = false;
 let sectionObserverStarted = false;
 
 function getConsentChoice() {
+  if (typeof window.__initialAnalyticsConsent !== 'undefined') {
+    return window.__initialAnalyticsConsent;
+  }
   try {
     return localStorage.getItem(ANALYTICS_CONSENT_KEY);
   } catch (_) {
@@ -39,6 +42,7 @@ function getConsentChoice() {
 function saveConsentChoice(choice) {
   try {
     localStorage.setItem(ANALYTICS_CONSENT_KEY, choice);
+    window.__initialAnalyticsConsent = choice;
   } catch (_) {
     // If localStorage is unavailable, honor the choice for the current page only.
   }
@@ -63,34 +67,6 @@ function ensureGtagQueue() {
   window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
 }
 
-function initializeGoogleAnalytics(initialChoice) {
-  if (document.querySelector('script[data-ga-loader]')) return;
-
-  ensureGtagQueue();
-
-  // Advanced Consent Mode. A returning visitor who previously opted in can
-  // start with analytics_storage granted; all other visitors start denied.
-  const analyticsStorage = initialChoice === 'granted' ? 'granted' : 'denied';
-  window.gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: analyticsStorage,
-    wait_for_update: 500
-  });
-
-  window.gtag('js', new Date());
-  window.gtag('config', GA_MEASUREMENT_ID, {
-    anonymize_ip: true
-  });
-
-  const gaScript = document.createElement('script');
-  gaScript.async = true;
-  gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
-  gaScript.dataset.gaLoader = 'true';
-  document.head.appendChild(gaScript);
-}
-
 function updateGoogleConsent(choice) {
   ensureGtagQueue();
   window.gtag('consent', 'update', {
@@ -99,6 +75,22 @@ function updateGoogleConsent(choice) {
     ad_personalization: 'denied',
     analytics_storage: choice === 'granted' ? 'granted' : 'denied'
   });
+}
+
+function sendConsentedPageViewOnce() {
+  if (!analyticsGranted || window.__gaPageViewSent) return;
+  ensureGtagQueue();
+
+  // Explicit page_view after consent. This guarantees that the first detailed
+  // GA4 hit for a newly consenting visitor is sent with analytics_storage=granted.
+  const pageViewParams = {
+    page_title: document.title,
+    page_location: window.location.href
+  };
+  if (document.referrer) pageViewParams.page_referrer = document.referrer;
+
+  window.gtag('event', 'page_view', pageViewParams);
+  window.__gaPageViewSent = true;
 }
 
 function loadMicrosoftClarity() {
@@ -155,6 +147,7 @@ function enableAnalytics() {
   if (analyticsGranted) return;
   analyticsGranted = true;
   updateGoogleConsent('granted');
+  sendConsentedPageViewOnce();
   loadMicrosoftClarity();
   startSectionViewTracking();
 }
@@ -174,7 +167,7 @@ function disableAnalyticsAndReloadIfNeeded() {
   analyticsGranted = false;
 
   // If Clarity was already loaded, reload so its recording script is removed.
-  // GA4 remains present after reload in consent-denied mode by design.
+  // The GA4 tag remains present after reload in consent-denied mode by design.
   if (clarityWasLoaded) window.location.reload();
 }
 
@@ -219,11 +212,11 @@ document.querySelectorAll('[data-open-consent]').forEach(button => {
 
 const initialConsent = getConsentChoice();
 
-// Load the Google tag immediately with the correct consent default.
-initializeGoogleAnalytics(initialConsent);
-
 if (initialConsent === 'granted') {
   analyticsGranted = true;
+  // Consent was already granted before the tag loaded (set in <head>), so send
+  // this page's single detailed page_view now.
+  sendConsentedPageViewOnce();
   loadMicrosoftClarity();
   startSectionViewTracking();
 } else if (initialConsent !== 'denied') {
