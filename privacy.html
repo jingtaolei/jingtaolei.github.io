@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Privacy and analytics information for Jingtao Lei's academic website." />
+  <meta name="author" content="Jingtao Lei" />
+  <title>Privacy | Jingtao Lei</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell nav-wrap">
+      <a class="brand" href="index.html">Jingtao Lei</a>
+      <nav class="nav" aria-label="Privacy page navigation">
+        <a href="index.html#research">Research</a>
+        <a href="index.html#publications">Publications</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+    </div>
+  </header>
+
+  <main class="privacy-main">
+    <div class="shell privacy-content">
+      <p class="section-kicker">Privacy</p>
+      <h1>Analytics &amp; Privacy</h1>
+      <p class="privacy-meta">Last updated: September 2, 2026</p>
+
+      <p>
+        This is a personal academic website. It does not provide user accounts, advertising,
+        e-commerce, or forms that ask visitors to submit personal information. Analytics are used
+        only to understand aggregate site usage and improve the presentation of research and academic content.
+      </p>
+
+      <h2>Cloudflare Web Analytics</h2>
+      <p>
+        The site uses Cloudflare Web Analytics for privacy-focused traffic and performance measurement.
+        Cloudflare states that its Web Analytics product does not use cookies to collect usage metrics
+        and does not collect or use visitors' personal data. This measurement remains enabled independently
+        of the optional analytics preference below.
+      </p>
+
+      <h2>Optional analytics: Google Analytics 4 and Microsoft Clarity</h2>
+      <p>
+        Google Analytics 4 (GA4) and Microsoft Clarity are optional. On this site, their scripts are loaded
+        only after a visitor chooses <strong>Accept analytics</strong> in the analytics banner.
+      </p>
+      <ul>
+        <li><strong>Google Analytics 4</strong> is used to measure page visits and selected interactions, such as visits to major sections and clicks on the CV, GitHub profile, project code, and contact links.</li>
+        <li><strong>Microsoft Clarity</strong> is used to understand anonymous interaction patterns through tools such as heatmaps and session recordings.</li>
+      </ul>
+      <p>
+        This website does not intentionally send names, email addresses, or other directly identifying
+        information to these analytics services. Advertising storage and personalization signals are not enabled by this implementation.
+      </p>
+
+      <h2>Your choice</h2>
+      <p>
+        You can accept or reject optional analytics. Your choice is stored locally in your browser under
+        <code>analytics_consent</code> so the site can remember it on later visits. If you reject optional analytics,
+        GA4 and Clarity are not loaded by this site. You can change your choice at any time using
+        <strong>Analytics preferences</strong> in the footer.
+      </p>
+
+      <h2>Third-party information</h2>
+      <p>
+        For more information about how these services handle data, see the official privacy and product documentation from
+        <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noreferrer">Cloudflare</a>,
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Google</a>, and
+        <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noreferrer">Microsoft</a>.
+      </p>
+
+      <div class="privacy-actions">
+        <a class="button primary" href="index.html">Back to homepage</a>
+        <button class="button" type="button" data-open-consent>Analytics preferences</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-wrap">
+      <span>© 2026 Jingtao Lei</span>
+      <span class="footer-links">
+        <a href="index.html">Home</a>
+        <button type="button" class="footer-link-button" data-open-consent>Analytics preferences</button>
+      </span>
+    </div>
+  </footer>
+
+  <aside class="consent-banner" id="analytics-consent" role="dialog" aria-labelledby="consent-title" aria-describedby="consent-description" hidden>
+    <div class="consent-inner">
+      <div class="consent-copy">
+        <strong id="consent-title">Analytics &amp; Privacy</strong>
+        <p id="consent-description">
+          This site uses optional Google Analytics and Microsoft Clarity to understand how visitors use the site.
+          You can accept or reject non-essential analytics.
+        </p>
+      </div>
+      <div class="consent-actions">
+        <button type="button" class="consent-button secondary" data-consent="denied">Reject</button>
+        <button type="button" class="consent-button primary" data-consent="granted">Accept analytics</button>
+      </div>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+  <!-- Cloudflare Web Analytics -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8a72ad30b9ee49d7b2c2c8fedf3841cb"}'></script>
+</body>
+</html>

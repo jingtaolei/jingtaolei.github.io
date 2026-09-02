@@ -21,7 +21,7 @@
       <nav class="nav" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#research">Research</a>
-        <a href="#publications">Publications</a>
+        <a href="#publications" data-analytics-event="click_publications_nav" data-analytics-location="primary_nav">Publications</a>
         <a href="#skills">Skills</a>
         <a href="#awards">Awards</a>
         <a href="#contact">Contact</a>
@@ -41,9 +41,9 @@
             beyond visual generation toward richer representations of the physical world.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="assets/cv/Jingtao_Lei_CV.pdf">View CV</a>
-            <a class="button" href="https://github.com/jingtaolei" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="button" href="mailto:2617549@dundee.ac.uk">Academic Email</a>
+            <a class="button primary" href="assets/cv/Jingtao_Lei_CV.pdf" data-analytics-event="click_cv" data-analytics-location="hero">View CV</a>
+            <a class="button" href="https://github.com/jingtaolei" target="_blank" rel="noreferrer" data-analytics-event="click_github_profile" data-analytics-location="hero">GitHub</a>
+            <a class="button" href="mailto:2617549@dundee.ac.uk" data-analytics-event="click_academic_email" data-analytics-location="hero">Academic Email</a>
           </div>
           <div class="research-tags" aria-label="Research interests">
             <span>Multimodal Learning</span>
@@ -167,7 +167,7 @@
             </li>
           </ul>
           <div class="card-actions">
-            <a href="https://github.com/jingtaolei/mope-dynamic-prompt-truncation" target="_blank" rel="noreferrer">
+            <a href="https://github.com/jingtaolei/mope-dynamic-prompt-truncation" target="_blank" rel="noreferrer" data-analytics-event="click_mope_code" data-analytics-location="research">
               View project code →
             </a>
           </div>
@@ -183,7 +183,7 @@
           <p class="pub-status">Manuscript in preparation · 2026</p>
           <h3>Sample-Wise Dynamic Prompt Truncation in a MoPE-Style Multimodal Classifier for Chest X-Ray Classification</h3>
           <p><strong>Jingtao Lei</strong>, Hongji Li, Dexiang Shu</p>
-          <a href="https://github.com/jingtaolei/mope-dynamic-prompt-truncation" target="_blank" rel="noreferrer">
+          <a href="https://github.com/jingtaolei/mope-dynamic-prompt-truncation" target="_blank" rel="noreferrer" data-analytics-event="click_mope_code" data-analytics-location="publications">
             Code and experiment repository →
           </a>
         </article>
@@ -262,19 +262,19 @@
           </p>
         </div>
         <div class="contact-links">
-          <a href="mailto:2617549@dundee.ac.uk">
+          <a href="mailto:2617549@dundee.ac.uk" data-analytics-event="click_academic_email" data-analytics-location="contact">
             <span>Academic / Research Email</span>
             <strong>2617549@dundee.ac.uk</strong>
           </a>
-          <a href="mailto:leijingtao2005@gmail.com">
+          <a href="mailto:leijingtao2005@gmail.com" data-analytics-event="click_personal_email" data-analytics-location="contact">
             <span>Personal Email</span>
             <strong>leijingtao2005@gmail.com</strong>
           </a>
-          <a href="https://github.com/jingtaolei" target="_blank" rel="noreferrer">
+          <a href="https://github.com/jingtaolei" target="_blank" rel="noreferrer" data-analytics-event="click_github_profile" data-analytics-location="contact">
             <span>GitHub</span>
             <strong>jingtaolei</strong>
           </a>
-          <a href="assets/cv/Jingtao_Lei_CV.pdf">
+          <a href="assets/cv/Jingtao_Lei_CV.pdf" data-analytics-event="click_cv" data-analytics-location="contact">
             <span>Curriculum Vitae</span>
             <strong>View PDF</strong>
           </a>
@@ -286,11 +286,32 @@
   <footer class="site-footer">
     <div class="shell footer-wrap">
       <span>© 2026 Jingtao Lei</span>
-      <span>Built as a lightweight academic site with GitHub Pages.</span>
+      <span class="footer-links">
+        <span>Built as a lightweight academic site with GitHub Pages.</span>
+        <a href="privacy.html">Privacy</a>
+        <button type="button" class="footer-link-button" data-open-consent>Analytics preferences</button>
+      </span>
     </div>
   </footer>
 
+  <aside class="consent-banner" id="analytics-consent" role="dialog" aria-labelledby="consent-title" aria-describedby="consent-description" hidden>
+    <div class="consent-inner">
+      <div class="consent-copy">
+        <strong id="consent-title">Analytics &amp; Privacy</strong>
+        <p id="consent-description">
+          This site uses optional Google Analytics and Microsoft Clarity to understand how visitors use the site.
+          You can accept or reject non-essential analytics. <a href="privacy.html">Learn more</a>.
+        </p>
+      </div>
+      <div class="consent-actions">
+        <button type="button" class="consent-button secondary" data-consent="denied">Reject</button>
+        <button type="button" class="consent-button primary" data-consent="granted">Accept analytics</button>
+      </div>
+    </div>
+  </aside>
+
   <script src="script.js"></script>
-  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8a72ad30b9ee49d7b2c2c8fedf3841cb"}'></script><!-- End Cloudflare Web Analytics -->
+  <!-- Cloudflare Web Analytics: privacy-first and cookie-free; kept independent from optional analytics consent. -->
+  <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "8a72ad30b9ee49d7b2c2c8fedf3841cb"}'></script>
 </body>
 </html>
