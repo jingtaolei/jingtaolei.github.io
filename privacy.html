@@ -3,42 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Privacy and analytics information for Jingtao Lei's academic website." />
+  <meta name="description" content="Privacy information for Jingtao Lei's academic website." />
   <meta name="author" content="Jingtao Lei" />
   <title>Privacy | Jingtao Lei</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
-  <!-- Google Analytics 4 + Consent Mode bootstrap.
-       The tag is present in <head> for reliable detection, but automatic page_view is disabled.
-       Detailed GA4 page-view and custom interaction events are sent only after analytics consent. -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
-
-    (function () {
-      let initialAnalyticsConsent = null;
-      try {
-        initialAnalyticsConsent = localStorage.getItem('analytics_consent');
-      } catch (_) {
-        initialAnalyticsConsent = null;
-      }
-
-      window.__initialAnalyticsConsent = initialAnalyticsConsent;
-      window.__gaPageViewSent = false;
-
-      window.gtag('consent', 'default', {
-        ad_storage: 'denied',
-        ad_user_data: 'denied',
-        ad_personalization: 'denied',
-        analytics_storage: initialAnalyticsConsent === 'granted' ? 'granted' : 'denied'
-      });
-      window.gtag('js', new Date());
-      window.gtag('config', 'G-N79HTK8MHH', {
-        send_page_view: false
-      });
-    })();
-  </script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N79HTK8MHH" data-ga-loader="true"></script>
 </head>
 <body>
   <header class="site-header">
@@ -56,64 +25,46 @@
   <main class="privacy-main">
     <div class="shell privacy-content">
       <p class="section-kicker">Privacy</p>
-      <h1>Analytics &amp; Privacy</h1>
-      <p class="privacy-meta">Last updated: September 2, 2026</p>
+      <h1>Privacy</h1>
+      <p class="privacy-meta">Last updated: September 5, 2026</p>
 
       <p>
         This is a personal academic website. It does not provide user accounts, advertising,
-        e-commerce, or forms that ask visitors to submit personal information. Analytics are used
-        only to understand aggregate site usage and improve the presentation of research and academic content.
+        e-commerce, or forms that ask visitors to submit personal information.
       </p>
 
-      <h2>Cloudflare Web Analytics</h2>
+      <h2>Cloudflare analytics</h2>
       <p>
-        The site uses Cloudflare Web Analytics for privacy-focused traffic and performance measurement.
-        Cloudflare states that its Web Analytics product does not use cookies to collect usage metrics
-        and does not collect or use visitors' personal data. This measurement remains enabled independently
-        of the optional analytics preference below.
+        This site uses Cloudflare Web Analytics for aggregate traffic and website performance measurement.
+        Cloudflare states that Web Analytics does not use cookies to collect usage metrics and is designed
+        without cross-site tracking of individual visitors.
       </p>
-
-      <h2>Optional analytics: Google Analytics 4 and Microsoft Clarity</h2>
       <p>
-        Google Analytics 4 (GA4) uses Google's consent mode. The Google tag loads in the page head so that
-        consent state can be handled reliably, but analytics storage and all advertising-related storage are
-        denied unless a visitor chooses <strong>Accept analytics</strong>. This site disables GA4's automatic
-        page view and does not intentionally send detailed GA4 page-view or custom interaction events until
-        analytics consent has been granted. Microsoft Clarity is loaded only after a visitor chooses
-        <strong>Accept analytics</strong>.
+        The site also records a small set of anonymous interaction events through a Cloudflare Worker and
+        Workers Analytics Engine. These events include page views, visits to major sections, and clicks on
+        the CV, GitHub profile, project code, Publications navigation, and contact links.
       </p>
-      <ul>
-        <li><strong>Google Analytics 4</strong> is used to measure page visits and selected interactions, such as visits to major sections and clicks on the CV, GitHub profile, project code, and contact links.</li>
-        <li><strong>Microsoft Clarity</strong> is used to understand anonymous interaction patterns through tools such as heatmaps and session recordings.</li>
-      </ul>
       <p>
-        This website does not intentionally send names, email addresses, or other directly identifying
-        information to these analytics services. Email-link events record only that an academic or personal
-        email link was clicked and where the link appeared; the email address and mailto URL are not sent as
-        custom GA4 event parameters. Email links and the contact-link area are also explicitly masked for Microsoft Clarity.
-        Advertising storage and personalization signals are not enabled by this implementation.
+        For these anonymous events, the site may store the event type, page path, referring website host,
+        approximate country, region and city, timezone, a coarse device class, and the event time.
+        Approximate location is derived by Cloudflare from the incoming network request. The site does not
+        store the visitor's IP address, precise coordinates, postal code, full user-agent string, cookies,
+        persistent visitor IDs, session IDs, email addresses, or browser fingerprints for this analytics system.
+        Events are therefore not linked into individual visitor profiles or cross-visit histories.
       </p>
-
-      <h2>Your choice</h2>
       <p>
-        You can accept or reject optional analytics. Your choice is stored locally in your browser under
-        <code>analytics_consent</code> so the site can remember it on later visits. If you reject optional analytics,
-        GA4 remains in consent-denied mode without Analytics cookies or detailed site-interaction events, while Microsoft Clarity is not loaded.
-        You can change your choice at any time using
-        <strong>Analytics preferences</strong> in the footer.
+        The site does not use Google Analytics, Microsoft Clarity, session recording, advertising trackers,
+        or analytics cookies.
       </p>
 
       <h2>Third-party information</h2>
       <p>
-        For more information about how these services handle data, see the official privacy and product documentation from
-        <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noreferrer">Cloudflare</a>,
-        <a href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Google</a>, and
-        <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noreferrer">Microsoft</a>.
+        For more information about Cloudflare's privacy practices, see the
+        <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noreferrer">Cloudflare Privacy Policy</a>.
       </p>
 
       <div class="privacy-actions">
         <a class="button primary" href="index.html">Back to homepage</a>
-        <button class="button" type="button" data-open-consent>Analytics preferences</button>
       </div>
     </div>
   </main>
@@ -123,26 +74,9 @@
       <span>© 2026 Jingtao Lei</span>
       <span class="footer-links">
         <a href="index.html">Home</a>
-        <button type="button" class="footer-link-button" data-open-consent>Analytics preferences</button>
       </span>
     </div>
   </footer>
-
-  <aside class="consent-banner" id="analytics-consent" role="dialog" aria-labelledby="consent-title" aria-describedby="consent-description" hidden>
-    <div class="consent-inner">
-      <div class="consent-copy">
-        <strong id="consent-title">Analytics &amp; Privacy</strong>
-        <p id="consent-description">
-          This site uses Google Analytics with consent controls and optional Microsoft Clarity to understand how visitors use the site.
-          You can accept or reject non-essential analytics.
-        </p>
-      </div>
-      <div class="consent-actions">
-        <button type="button" class="consent-button secondary" data-consent="denied">Reject</button>
-        <button type="button" class="consent-button primary" data-consent="granted">Accept analytics</button>
-      </div>
-    </div>
-  </aside>
 
   <script src="script.js"></script>
   <!-- Cloudflare Web Analytics -->

@@ -15,210 +15,92 @@ if (toggle && nav) {
   });
 }
 
-// Analytics architecture:
-// - Cloudflare Web Analytics runs independently (cookie-free).
-// - The GA4 tag is bootstrapped in <head> with Consent Mode and automatic
-//   page_view disabled. Detailed GA4 page-view/custom events are sent only
-//   after explicit analytics opt-in.
-// - Microsoft Clarity loads only after explicit opt-in.
-const ANALYTICS_CONSENT_KEY = 'analytics_consent';
-const CLARITY_PROJECT_ID = 'ybtnl0rk7v';
+// Anonymous interaction analytics through a Cloudflare Worker + Analytics Engine.
+// Anonymous event endpoint hosted on Cloudflare Workers.
+const ANONYMOUS_ANALYTICS_ENDPOINT =
+  'https://jingtao-academic-analytics.leijingtao2005.workers.dev/event';
 
-const consentBanner = document.getElementById('analytics-consent');
-let analyticsGranted = false;
-let sectionObserverStarted = false;
+const TRACKED_SECTIONS = ['research', 'publications', 'skills', 'awards', 'contact'];
 
-function getConsentChoice() {
-  if (typeof window.__initialAnalyticsConsent !== 'undefined') {
-    return window.__initialAnalyticsConsent;
-  }
+function analyticsEndpointReady() {
+  return (
+    ANONYMOUS_ANALYTICS_ENDPOINT.startsWith('https://') &&
+    !ANONYMOUS_ANALYTICS_ENDPOINT.includes('YOUR-WORKER-NAME') &&
+    !ANONYMOUS_ANALYTICS_ENDPOINT.includes('YOUR-SUBDOMAIN')
+  );
+}
+
+function currentReferrerHost() {
+  if (!document.referrer) return 'direct';
   try {
-    return localStorage.getItem(ANALYTICS_CONSENT_KEY);
+    return new URL(document.referrer).hostname || 'direct';
   } catch (_) {
-    return null;
+    return 'unknown';
   }
 }
 
-function saveConsentChoice(choice) {
-  try {
-    localStorage.setItem(ANALYTICS_CONSENT_KEY, choice);
-    window.__initialAnalyticsConsent = choice;
-  } catch (_) {
-    // If localStorage is unavailable, honor the choice for the current page only.
-  }
-}
+function sendAnonymousEvent(eventName, context = '') {
+  if (!analyticsEndpointReady()) return;
 
-function showConsentBanner() {
-  if (!consentBanner) return;
-  consentBanner.hidden = false;
-  requestAnimationFrame(() => consentBanner.classList.add('visible'));
-}
+  const payload = {
+    event: eventName,
+    page: window.location.pathname || '/',
+    referrer_host: currentReferrerHost(),
+    context
+  };
 
-function hideConsentBanner() {
-  if (!consentBanner) return;
-  consentBanner.classList.remove('visible');
-  window.setTimeout(() => {
-    consentBanner.hidden = true;
-  }, 180);
-}
-
-function ensureGtagQueue() {
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag(){ window.dataLayer.push(arguments); };
-}
-
-function updateGoogleConsent(choice) {
-  ensureGtagQueue();
-  window.gtag('consent', 'update', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: choice === 'granted' ? 'granted' : 'denied'
+  // The request contains no cookie, visitor ID, session ID, email address,
+  // destination URL, or browser fingerprint. keepalive improves delivery when
+  // a click immediately navigates away.
+  fetch(ANONYMOUS_ANALYTICS_ENDPOINT, {
+    method: 'POST',
+    mode: 'cors',
+    credentials: 'omit',
+    cache: 'no-store',
+    keepalive: true,
+    referrerPolicy: 'no-referrer',
+    headers: {
+      'Content-Type': 'text/plain;charset=UTF-8'
+    },
+    body: JSON.stringify(payload)
+  }).catch(() => {
+    // Analytics must never interfere with normal site behavior.
   });
 }
 
-function sendConsentedPageViewOnce() {
-  if (!analyticsGranted || window.__gaPageViewSent) return;
-  ensureGtagQueue();
+// One anonymous page-view event per page load. This is intentionally not tied
+// to a persistent visitor or session identifier.
+sendAnonymousEvent('page_view', 'page');
 
-  // Explicit page_view after consent. This guarantees that the first detailed
-  // GA4 hit for a newly consenting visitor is sent with analytics_storage=granted.
-  const pageViewParams = {
-    page_title: document.title,
-    page_location: window.location.href
-  };
-  if (document.referrer) pageViewParams.page_referrer = document.referrer;
-
-  window.gtag('event', 'page_view', pageViewParams);
-  window.__gaPageViewSent = true;
-}
-
-function loadMicrosoftClarity() {
-  if (document.querySelector('script[data-clarity-loader]')) return;
-
-  // Queue calls made before the Clarity library finishes loading.
-  window.clarity = window.clarity || function () {
-    (window.clarity.q = window.clarity.q || []).push(arguments);
-  };
-
-  // This site does not use Clarity for advertising.
-  window.clarity('consentv2', {
-    ad_Storage: 'denied',
-    analytics_Storage: 'granted'
+// Explicit clicks that are useful for an academic homepage.
+document.querySelectorAll('[data-anon-event]').forEach(link => {
+  link.addEventListener('click', () => {
+    sendAnonymousEvent(
+      link.dataset.anonEvent,
+      link.dataset.anonContext || 'site'
+    );
   });
+});
 
-  const clarityScript = document.createElement('script');
-  clarityScript.async = true;
-  clarityScript.src = `https://www.clarity.ms/tag/${encodeURIComponent(CLARITY_PROJECT_ID)}`;
-  clarityScript.dataset.clarityLoader = 'true';
-  document.head.appendChild(clarityScript);
-}
-
-function trackEvent(eventName, params = {}) {
-  // Custom interaction events are sent only after explicit analytics opt-in.
-  if (!analyticsGranted || typeof window.gtag !== 'function') return;
-  window.gtag('event', eventName, params);
-}
-
-function startSectionViewTracking() {
-  if (sectionObserverStarted || !('IntersectionObserver' in window)) return;
-  sectionObserverStarted = true;
-
-  const trackedSections = ['research', 'publications', 'skills', 'awards', 'contact'];
-  const seen = new Set();
+// Record whether a visitor actually reaches major sections. Each section is
+// counted at most once per page load and is not linked to later visits.
+if ('IntersectionObserver' in window) {
+  const seenSections = new Set();
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting || entry.intersectionRatio < 0.35) return;
+
       const id = entry.target.id;
-      if (!id || seen.has(id)) return;
-      seen.add(id);
-      trackEvent(`view_${id}`, { section_id: id });
+      if (!id || seenSections.has(id)) return;
+
+      seenSections.add(id);
+      sendAnonymousEvent(`view_${id}`, id);
       observer.unobserve(entry.target);
     });
   }, { threshold: [0.35] });
 
-  trackedSections.forEach(id => {
+  TRACKED_SECTIONS.forEach(id => {
     const section = document.getElementById(id);
     if (section) observer.observe(section);
   });
-}
-
-function enableAnalytics() {
-  if (analyticsGranted) return;
-  analyticsGranted = true;
-  updateGoogleConsent('granted');
-  sendConsentedPageViewOnce();
-  loadMicrosoftClarity();
-  startSectionViewTracking();
-}
-
-function disableAnalyticsAndReloadIfNeeded() {
-  const clarityWasLoaded = Boolean(document.querySelector('script[data-clarity-loader]'));
-
-  updateGoogleConsent('denied');
-
-  if (typeof window.clarity === 'function') {
-    window.clarity('consentv2', {
-      ad_Storage: 'denied',
-      analytics_Storage: 'denied'
-    });
-  }
-
-  analyticsGranted = false;
-
-  // If Clarity was already loaded, reload so its recording script is removed.
-  // The GA4 tag remains present after reload in consent-denied mode by design.
-  if (clarityWasLoaded) window.location.reload();
-}
-
-function applyConsent(choice) {
-  saveConsentChoice(choice);
-  hideConsentBanner();
-
-  if (choice === 'granted') {
-    enableAnalytics();
-  } else {
-    disableAnalyticsAndReloadIfNeeded();
-  }
-}
-
-// Explicit click events useful for an academic homepage.
-// Never send email addresses (including mailto: URLs or visible email text) to GA4.
-document.querySelectorAll('[data-analytics-event]').forEach(link => {
-  link.addEventListener('click', () => {
-    const params = {
-      link_location: link.dataset.analyticsLocation || 'site'
-    };
-
-    const href = link.getAttribute('href') || '';
-    const isEmailLink = href.trim().toLowerCase().startsWith('mailto:');
-
-    if (!isEmailLink) {
-      params.link_url = link.href || '';
-      params.link_text = (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 120);
-    }
-
-    trackEvent(link.dataset.analyticsEvent, params);
-  });
-});
-
-document.querySelectorAll('[data-consent]').forEach(button => {
-  button.addEventListener('click', () => applyConsent(button.dataset.consent));
-});
-
-document.querySelectorAll('[data-open-consent]').forEach(button => {
-  button.addEventListener('click', showConsentBanner);
-});
-
-const initialConsent = getConsentChoice();
-
-if (initialConsent === 'granted') {
-  analyticsGranted = true;
-  // Consent was already granted before the tag loaded (set in <head>), so send
-  // this page's single detailed page_view now.
-  sendConsentedPageViewOnce();
-  loadMicrosoftClarity();
-  startSectionViewTracking();
-} else if (initialConsent !== 'denied') {
-  showConsentBanner();
 }

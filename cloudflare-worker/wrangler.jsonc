@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "jingtao-academic-analytics",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-05",
+  "workers_dev": true,
+  "analytics_engine_datasets": [
+    {
+      "binding": "ANALYTICS",
+      "dataset": "jingtao_academic_events"
+    }
+  ]
+}

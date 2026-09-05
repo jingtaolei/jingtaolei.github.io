@@ -21,4 +21,12 @@ For general communication, you can also reach me at **leijingtao2005@gmail.com**
 
 ## Analytics and privacy
 
-The site uses Cloudflare Web Analytics for privacy-first aggregate traffic measurement. Google Analytics 4 is bootstrapped with Consent Mode and automatic page-view collection disabled; detailed GA4 page-view and custom interaction events are sent only after explicit analytics consent. Microsoft Clarity is loaded only after consent. A visitor's choice is remembered locally and can be changed through the footer. See `privacy.html` for the public disclosure.
+The site uses **Cloudflare Web Analytics** plus a small anonymous event collector built with **Cloudflare Workers + Workers Analytics Engine**.
+
+The custom collector records only coarse, non-persistent information such as event type, page path, referring host, approximate country/region/city, timezone, coarse device class, and event time. It does **not** store IP addresses, cookies, persistent visitor IDs, session IDs, email addresses, precise coordinates, full user-agent strings, or browser fingerprints.
+
+Tracked interactions include page views, major-section views, and clicks on the CV, GitHub profile, project code, Publications navigation, and contact links.
+
+The site does not use Google Analytics, Microsoft Clarity, session recording, advertising trackers, or analytics cookies. See `privacy.html` for the public disclosure.
+
+The anonymous event endpoint is deployed at `https://jingtao-academic-analytics.leijingtao2005.workers.dev/event`. The Worker source and query helpers are included in `cloudflare-worker/` for maintenance and inspection.
