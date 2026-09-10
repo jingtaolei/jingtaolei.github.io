@@ -91,8 +91,8 @@
           <p>
             My current work investigates whether pretrained video diffusion models encode usable
             physical dynamics, and how those internal representations might support future
-            world-model capabilities. Previously, I developed a sample-wise dynamic prompt
-            truncation mechanism for parameter-efficient multimodal learning.
+            world-model capabilities. Previously, I developed a layer-wise gate-controlled prompt
+            truncation mechanism for parameter-efficient multimodal learning, now available as an arXiv preprint.
           </p>
         </div>
       </div>
@@ -141,25 +141,25 @@
             <span class="pill">Jan 2026 – Jul 2026</span>
             <span>Multimodal Learning Research Project</span>
           </div>
-          <h3>Sample-Wise Dynamic Prompt Truncation for Multimodal Learning</h3>
+          <h3>Layer-Wise Gate-Controlled Prompt Truncation in a Multimodal Chest X-Ray Classifier</h3>
           <p class="supervisor">Supervisor: Prof. David P. Woodruff</p>
           <p>
-            I studied whether prompt length can be treated as an adaptive resource in
-            parameter-efficient multimodal learning instead of assigning every sample the same
-            fixed prompt budget.
+            I studied gate-controlled prompt shortening in parameter-efficient multimodal learning,
+            extending a fixed-length prompt framework with a lightweight layer-wise controller.
           </p>
           <ul>
             <li>
-              Extended a ViT-based <strong>Mixture of Prompt Experts (MoPE)</strong> classifier
-              with a layer-wise gating mechanism that dynamically determines retained visual prompt length.
+              Extended a ViT-based <strong>Mixture of Prompt Experts (MoPE)</strong> classifier with
+              retention-ratio predictions; mini-batch-averaged ratios determine the integer retained
+              visual prompt length, while retained mixed prompts are scaled by individual ratios.
             </li>
             <li>
               Adapted the framework to a derived IU X-Ray chest X-ray classification task and
               implemented controlled fixed-versus-adaptive prompting experiments.
             </li>
             <li>
-              In the recorded experiment, reduced the effective visual prompt budget from
-              <strong>six tokens to one</strong> while maintaining validation performance.
+              In the recorded run, exported gate statistics retained <strong>one of six visual prompt tokens</strong>
+              at all recorded training points; runtime acceleration was not directly measured.
             </li>
             <li>
               Best validation accuracy increased from <strong>0.8969 to 0.8996</strong>;
@@ -167,6 +167,9 @@
             </li>
           </ul>
           <div class="card-actions">
+            <a href="https://arxiv.org/abs/2609.06590" target="_blank" rel="noreferrer">
+              Read preprint on arXiv →
+            </a>
             <a href="https://github.com/jingtaolei/mope-dynamic-prompt-truncation" target="_blank" rel="noreferrer" data-anon-event="click_project_code" data-anon-context="research">
               View project code →
             </a>
@@ -177,15 +180,21 @@
 
     <section class="section" id="publications">
       <div class="shell">
-        <p class="section-kicker">Publications &amp; Manuscripts</p>
-        <h2>Work in preparation</h2>
+        <p class="section-kicker">Publications</p>
+        <h2>Preprints</h2>
         <article class="publication">
-          <p class="pub-status">Manuscript in preparation · 2026</p>
-          <h3>Sample-Wise Dynamic Prompt Truncation in a MoPE-Style Multimodal Classifier for Chest X-Ray Classification</h3>
+          <p class="pub-status">arXiv preprint · September 2026</p>
+          <h3>Layer-Wise Gate-Controlled Prompt Truncation in a Multimodal Chest X-Ray Classifier</h3>
           <p><strong>Jingtao Lei</strong>, Hongji Li, Dexiang Shu</p>
-          <a href="https://github.com/jingtaolei/mope-dynamic-prompt-truncation" target="_blank" rel="noreferrer" data-anon-event="click_project_code" data-anon-context="publications">
-            Code and experiment repository →
-          </a>
+          <p>arXiv:2609.06590 · Submitted 6 September 2026</p>
+          <div class="card-actions">
+            <a href="https://arxiv.org/abs/2609.06590" target="_blank" rel="noreferrer">
+              Read on arXiv →
+            </a>
+            <a href="https://github.com/jingtaolei/mope-dynamic-prompt-truncation" target="_blank" rel="noreferrer" data-anon-event="click_project_code" data-anon-context="publications">
+              Code repository →
+            </a>
+          </div>
         </article>
       </div>
     </section>
@@ -220,6 +229,13 @@
         <p class="section-kicker">Awards & Academic Achievements</p>
         <h2>Selected achievements</h2>
         <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-mark"></span>
+            <div>
+              <h3>Second Prize</h3>
+              <p>6th &quot;Celian Cup&quot; Mathematical Modeling Elite League (Provincial-level Competition), 2026.</p>
+            </div>
+          </div>
           <div class="timeline-item">
             <span class="timeline-mark"></span>
             <div>

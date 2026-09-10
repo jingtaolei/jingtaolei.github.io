@@ -11,9 +11,9 @@ My current research interests are mainly in **multimodal learning, generative mo
 My recent research includes:
 
 - studying physical dynamics representations in **CogVideoX-2B** and exploring how video diffusion models could be extended toward world-model capabilities;
-- developing a **sample-wise dynamic prompt truncation** method for parameter-efficient multimodal learning.
+- developing a **layer-wise gate-controlled prompt truncation** method for parameter-efficient multimodal learning, now available as an arXiv preprint: **[arXiv:2609.06590](https://arxiv.org/abs/2609.06590)**.
 
-The website includes a summary of my research experience, current manuscript, technical background, awards, and CV.
+The website includes a summary of my research experience, current arXiv preprint, technical background, awards, and CV.
 
 For academic or research-related communication, please contact me at **2617549@dundee.ac.uk**.  
 For general communication, you can also reach me at **leijingtao2005@gmail.com**.
