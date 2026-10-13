@@ -130,8 +130,8 @@ h1 em { color: #58745a; }
 .contact-links { border: 1px solid #ffffffa3; border-radius: 5px; padding: 10px 27px; background: #f7f9ef77; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 10px 40px #3e543214; }
 .contact-links a { display: block; position: relative; padding: 19px 28px 19px 0; }
 .contact-links a + a { border-top: 1px solid #c7d1bcaa; }
-.contact-links a::after { content: '↗'; position: absolute; right: 0; top: 28px; font-size: 20px; color: #849778; }
-.contact-links a:hover::after { transform: translate(2px,-2px); }
+.contact-arrow { position: absolute; right: 0; top: 28px; font-size: 20px; color: #849778; line-height: 1; }
+.contact-links a:hover .contact-arrow { transform: translate(2px,-2px); }
 .contact-links span { display: block; font-size: 8px; text-transform: uppercase; letter-spacing: .09em; color: #819073; margin-bottom: 5px; }
 .contact-links strong { font-family: var(--serif); font-size: 19px; font-weight: 400; overflow-wrap: anywhere; }
 .site-footer { padding: 27px 0; background: #f0f1e6; color: #818974; border-top: 1px solid #d4ddc7; }
@@ -265,7 +265,7 @@ h1 em { color: #58745a; }
 .conversation-ring { transform-origin: 153px 25px; animation: small-ring 9s ease-in-out infinite; }
 .contact-section { background: #e5ebe3; padding-bottom: 70px; }
 .contact-section::before { background: linear-gradient(90deg, #eef1e5ed, #edf2e5a8), url('assets/art/sisley-banks-oise.jpg') center 68% / cover; filter: blur(5px) saturate(.8); }
-.contact-links a::after { transition: transform .3s; }
+.contact-arrow { transition: transform .3s; }
 .contact-links a::before { content: ''; position: absolute; inset: 12px -10px; border-radius: 4px; background: #ffffff40; opacity: 0; transform: scaleX(.96); transition: opacity .3s, transform .3s; z-index: -1; }
 .contact-links a:hover::before { opacity: 1; transform: scaleX(1); }
 .contact-art-credit { margin-top: 40px; text-align: right; font-size: 9px; }
@@ -398,3 +398,8 @@ h1 em { color: #58745a; }
 .about-geometry.motion-active .basis-transfer { animation-play-state: running; }
 @keyframes basis-map { 0%,12%,78%,100% { opacity: 0; transform: translateX(0); } 20% { opacity: .8; transform: translateX(0); } 46%,62% { opacity: .8; transform: translateX(27px); } 70% { opacity: 0; transform: translateX(27px); } }
 @media (max-width: 760px) { .about-geometry { width: min(360px,100%); } }
+
+/* Draw interface symbols as vectors so mobile emoji fonts cannot substitute them. */
+.ui-icon { width: 1em; height: 1em; display: inline-block; vertical-align: -.15em; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.tiny-cross .ui-icon { width: 18px; height: 18px; display: block; stroke-width: 1.25; }
+.art-caption .ui-icon { width: 1.1em; margin-inline: .1em; }

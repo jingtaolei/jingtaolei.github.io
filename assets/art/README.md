@@ -7,7 +7,7 @@
 - Image source: https://commons.wikimedia.org/wiki/File:Claude_Monet_-_Cliff_Walk_at_Pourville_-_Google_Art_Project.jpg
 - Original image: https://upload.wikimedia.org/wikipedia/commons/a/a4/Claude_Monet_-_Cliff_Walk_at_Pourville_-_Google_Art_Project.jpg
 - Public domain reproduction; museum API also identifies the painting as public domain.
-- The retained reference is 1800 px wide. Version 3 loads a 1600 px JPEG optimized for web delivery (`monet-cliff-walk-web.jpg`), preserving the larger reference. CSS adds a muted colour treatment, regional blur and cream gradients. Ambient light and the geometric elements are drawn with Canvas and SVG.
+- The retained reference is 1800 px wide. Version 3 loads a 1600 px JPEG optimized for web delivery (`monet-cliff-walk-web.jpg`), preserving the larger reference. CSS adds a muted colour treatment, regional blur and cream gradients. Geometric studies use lightweight SVG and CSS. No Canvas or continuous rendering loop is used. Version 7 also reuses faint, local fragments of this artwork in the About and research plates.
 - No generated artwork is used.
 
 **Alfred Sisley — The Banks of the Oise, 1877/1878**
