@@ -7,6 +7,19 @@ if (toggle && nav) {
     toggle.setAttribute('aria-expanded', String(open));
   });
 
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && nav.classList.contains('open')) {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
+  });
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.nav-wrap')) {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
   nav.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       nav.classList.remove('open');
@@ -24,6 +37,7 @@ const TRACKED_SECTIONS = ['research', 'publications', 'skills', 'awards', 'conta
 
 function analyticsEndpointReady() {
   return (
+    !['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname) &&
     ANONYMOUS_ANALYTICS_ENDPOINT.startsWith('https://') &&
     !ANONYMOUS_ANALYTICS_ENDPOINT.includes('YOUR-WORKER-NAME') &&
     !ANONYMOUS_ANALYTICS_ENDPOINT.includes('YOUR-SUBDOMAIN')
@@ -103,4 +117,21 @@ if ('IntersectionObserver' in window) {
     const section = document.getElementById(id);
     if (section) observer.observe(section);
   });
+}
+
+// Keep the floating navigation in step with the visible fieldnote.
+if ('IntersectionObserver' in window) {
+  const links = document.querySelectorAll('.nav a[href^="#"]');
+  const activeSections = new Map();
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => activeSections.set(entry.target.id, entry.isIntersecting));
+    const current = Array.from(activeSections).find(([, visible]) => visible)?.[0];
+    links.forEach(link => {
+      const active = link.getAttribute('href') === `#${current}`;
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  }, { rootMargin: '-20% 0px -55% 0px', threshold: 0 });
+  document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
 }

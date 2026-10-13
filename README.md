@@ -30,3 +30,11 @@ Tracked interactions include page views, major-section views, and clicks on the 
 The site does not use Google Analytics, Microsoft Clarity, session recording, advertising trackers, or analytics cookies. See `privacy.html` for the public disclosure.
 
 The anonymous event endpoint is deployed at `https://jingtao-academic-analytics.leijingtao2005.workers.dev/event`. The Worker source and query helpers are included in `cloudflare-worker/` for maintenance and inspection.
+
+## Local UI preview
+
+From this directory, run `python3 -m http.server 4173 --bind 127.0.0.1`, then open `http://127.0.0.1:4173`.
+
+The interface combines Monet’s *Cliff Walk at Pourville* and Sisley’s *The Banks of the Oise* with a paper palette and frosted navigation. The ∀ mark connects the Turn A influence with mathematical inquiry. Lightweight SVG studies illustrate video observations, physical interaction, prompt gating, and the research toolkit. Motion runs only while the corresponding illustration is visible, pauses when the page is hidden, and respects reduced-motion preferences. Publication, toolkit, and contact-message illustrations animate on hover or keyboard focus. The navigation blends into the homepage painting at the top and softly gains a glass surface on scroll. Research notes smoothly expand and collapse using the keyboard or a click, while adjacent illustrations stay still. Local previews do not send production analytics.
+
+The current design is version 6. Complete checkpoints through version 5 are in the parent directory’s `ui-backups/`. Artistic research is documented in `design-notes/direction.md`; the latest changes are in `design-notes/v6-diagram-and-motion.md`.
