@@ -6,6 +6,8 @@
     "assets/versioned/analytics-config.c1d68aa21328.js": "analytics-config.js",
     "assets/versioned/apple-touch-icon.38293605c8da.png": "assets/icons/apple-touch-icon.png",
     "assets/versioned/collection.8e3738aa74cf.js": "collection.js",
+    "assets/versioned/collection.fa32c77ef6a9.js": "collection.js",
+    "assets/versioned/connection-check.24129e234b5b.js": "connection-check.js",
     "assets/versioned/connection-check.41ed587932ba.js": "connection-check.js",
     "assets/versioned/favicon-32-dark.7bc1b4005945.png": "assets/icons/favicon-32-dark.png",
     "assets/versioned/favicon-32.5cf9cdb39e24.png": "assets/icons/favicon-32.png",
@@ -39,8 +41,8 @@
     "assets/icons/apple-touch-icon.png": "assets/versioned/apple-touch-icon.38293605c8da.png",
     "assets/icons/favicon-32-dark.png": "assets/versioned/favicon-32-dark.7bc1b4005945.png",
     "assets/icons/favicon-32.png": "assets/versioned/favicon-32.5cf9cdb39e24.png",
-    "collection.js": "assets/versioned/collection.8e3738aa74cf.js",
-    "connection-check.js": "assets/versioned/connection-check.41ed587932ba.js",
+    "collection.js": "assets/versioned/collection.fa32c77ef6a9.js",
+    "connection-check.js": "assets/versioned/connection-check.24129e234b5b.js",
     "favicon.ico": "assets/versioned/favicon.d0cf5d3b8be7.ico",
     "favicon.svg": "assets/versioned/favicon.185fa6008c98.svg",
     "interaction.js": "assets/versioned/interaction.109599f6aada.js",
@@ -50,5 +52,5 @@
     "surfaces.css": "assets/versioned/surfaces.88ffacb6d658.css",
     "version-check.js": "assets/versioned/version-check.f85681bffdeb.js"
   },
-  "release": "a4232df5e88a"
+  "release": "66174b0046d9"
 }

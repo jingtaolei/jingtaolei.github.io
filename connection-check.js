@@ -2,13 +2,13 @@
  const run=document.querySelector('#run'),copy=document.querySelector('#copy'),result=document.querySelector('#result'),status=document.querySelector('#status');let report='';
  if(['localhost','127.0.0.1','[::1]'].includes(location.hostname)){run.disabled=true;status.textContent='本地预览不测试生产入口。发布后，请在发生漏记的设备与网络上运行此页。';}
  async function check(url,post=false){
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),6000),start=performance.now();
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000),start=performance.now();
   try{
    const response=await fetch(url,{method:post?'POST':'GET',mode:'cors',credentials:'omit',cache:'no-store',redirect:'error',referrerPolicy:'no-referrer',signal:controller.signal,...(post?{headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({event:'page_view',page:'/analytics-check.html',context:'connection-check'})}:{})});
    const type=response.headers.get('content-type')||'';const data=type.includes('application/json')?await response.json():null;
    const recognized=data?.service==='jingtao-anonymous-collector'||data?.version==='observatory-v2';
    return {success:!!(response.ok&&data?.ok&&recognized),http_status:response.status,milliseconds:Math.round(performance.now()-start),version:data?.version||null,country:data?.country||null,browser:data?.browser||null,os:data?.os||null,note:!response.ok?'服务返回错误状态。':!data?'收到非 JSON 页面；可能是登录页面、挑战页面或旧配置。':!recognized?'响应不是当前采集协议。':'连接与服务绑定校验通过，未写入事件。'};
-  }catch(error){return {success:false,milliseconds:Math.round(performance.now()-start),failure:error.name==='AbortError'?'timeout':'network_or_cors',note:error.name==='AbortError'?'6 秒内未完成响应。':'请求失败：浏览器无法仅凭此结果区分 DNS、路由、跨域、扩展或重定向。'};}finally{clearTimeout(timer);}
+  }catch(error){return {success:false,milliseconds:Math.round(performance.now()-start),failure:error.name==='AbortError'?'timeout':'network_or_cors',note:error.name==='AbortError'?'20 秒内未完成响应。':'请求失败：浏览器无法仅凭此结果区分 DNS、路由、跨域、扩展或重定向。'};}finally{clearTimeout(timer);}
  }
  run.addEventListener('click',async()=>{
   run.disabled=true;copy.disabled=true;result.hidden=true;status.textContent='分别检查健康页与事件路径…';
