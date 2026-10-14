@@ -144,3 +144,31 @@
 :is(.publication,.skill-card):is(:hover,:focus-within) .motion-active .attention-motion { opacity: 1; }
 :is(.publication,.skill-card):is(:hover,:focus-within) .motion-active .attention-motion * { animation-play-state: running; }
 @media (prefers-reduced-motion:reduce) { .attention-rest { opacity: 1 !important; } .attention-motion { opacity: 0 !important; } }
+
+/* Eighth pass: the small glass menu stays mounted, allowing interruption and reversal. */
+@media (max-width:760px) {
+  .nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform-origin: 50% 0;
+    transform: translateY(-8px) scale(.97,.94);
+    transition: opacity .36s ease,transform .42s var(--surface-ease),visibility 0s linear .42s;
+  }
+  .nav.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    transition: opacity .36s ease,transform .42s var(--surface-ease),visibility 0s;
+  }
+  .nav a {
+    opacity: .5;
+    transform: translateY(-4px);
+    transition: opacity .26s ease,transform .32s var(--surface-ease),color .2s;
+  }
+  .nav.open a { opacity: 1; transform: translateY(0); transition-delay: 45ms; }
+  .nav.open a:nth-child(n+3) { transition-delay: 75ms; }
+  .nav.open a:nth-child(n+5) { transition-delay: 105ms; }
+  .nav-toggle span { transition: transform .42s var(--surface-ease); }
+}

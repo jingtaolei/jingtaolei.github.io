@@ -10,9 +10,12 @@
     "assets/versioned/monet-cliff-walk-web.3e37091a1837.jpg": "assets/art/monet-cliff-walk-web.jpg",
     "assets/versioned/scene.af2ea2c0c840.js": "scene.js",
     "assets/versioned/script.143d64172a79.js": "script.js",
+    "assets/versioned/script.74299b5d62a6.js": "script.js",
     "assets/versioned/sisley-banks-oise.fdcf64ba2799.jpg": "assets/art/sisley-banks-oise.jpg",
     "assets/versioned/styles.25c0a990a5ad.css": "styles.css",
+    "assets/versioned/styles.345750b78b56.css": "styles.css",
     "assets/versioned/surfaces.33537d3723cf.css": "surfaces.css",
+    "assets/versioned/surfaces.4ddaf43f67e4.css": "surfaces.css",
     "assets/versioned/version-check.fe899418c000.js": "version-check.js"
   },
   "assets": {
@@ -26,10 +29,10 @@
     "favicon.svg": "assets/versioned/favicon.185fa6008c98.svg",
     "interaction.js": "assets/versioned/interaction.edea5f417217.js",
     "scene.js": "assets/versioned/scene.af2ea2c0c840.js",
-    "script.js": "assets/versioned/script.143d64172a79.js",
-    "styles.css": "assets/versioned/styles.25c0a990a5ad.css",
-    "surfaces.css": "assets/versioned/surfaces.33537d3723cf.css",
+    "script.js": "assets/versioned/script.74299b5d62a6.js",
+    "styles.css": "assets/versioned/styles.345750b78b56.css",
+    "surfaces.css": "assets/versioned/surfaces.4ddaf43f67e4.css",
     "version-check.js": "assets/versioned/version-check.fe899418c000.js"
   },
-  "release": "b5ba4bec7e6c"
+  "release": "0c1011636363"
 }

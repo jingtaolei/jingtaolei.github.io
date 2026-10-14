@@ -160,8 +160,8 @@ h1 em { color: #58745a; }
   .site-header { top: 14px; } .nav-wrap { width: calc(100% - 28px); min-height: 65px; padding: 10px 16px; }
   .brand { font-size: 18px; gap: 10px; } .brand-mark { height: 30px; width: 30px; font-size: 21px; } .brand-caption { font-size: 7px; }
   .nav-toggle { display: flex; align-items: center; gap: 14px; min-height: 44px; } .nav-toggle span { font-size: 20px; }
-  .nav { display: none; position: absolute; top: 74px; left: 14px; right: 14px; padding: 15px 20px; border: 1px solid #fcfbef; border-radius: 6px; background: #f8f8edf5; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 15px 35px #36462e1a; }
-  .nav.open { display: grid; grid-template-columns: repeat(2,1fr); gap: 0 20px; } .nav a { font-size: 12px; padding: 11px 5px; } .nav a::after { left: 0; bottom: 15px; }
+  .nav { display: grid; grid-template-columns: repeat(2,1fr); gap: 0 20px; position: absolute; top: calc(100% + 8px); left: 14px; right: 14px; padding: 15px 20px; border: 1px solid #fcfbef; border-radius: 6px; background: #f8f8edf5; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 15px 35px #36462e1a; }
+  .nav a { font-size: 12px; padding: 11px 5px; justify-self: start; min-width: 44px; min-height: 44px; } .nav a::after { left: calc(50% - 2px); bottom: 4px; }
   .hero { min-height: 870px; } .hero-grid { min-height: 780px; grid-template-columns: 1fr; gap: 0; padding-top: 140px; padding-bottom: 0; }
   h1 { font-size: clamp(64px,14vw,98px); } .eyebrow { font-size: 8px; letter-spacing: .12em; margin-bottom: 22px; }
   .hero-thought { font-size: 27px; } .hero-lead { max-width: 420px; font-size: 14px; }
