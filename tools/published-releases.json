@@ -1,6 +1,30 @@
 {
   "releases": [
     {
+      "release": "66174b0046d9",
+      "commit": "d070730de3cfe0ceacb504e6c8acb53d20cab9f2",
+      "retain_until": "2026-11-13",
+      "assets": {
+        "analytics-config.js": "assets/versioned/analytics-config.c1d68aa21328.js",
+        "assets/art/monet-cliff-walk-web.jpg": "assets/versioned/monet-cliff-walk-web.3e37091a1837.jpg",
+        "assets/art/sisley-banks-oise.jpg": "assets/versioned/sisley-banks-oise.fdcf64ba2799.jpg",
+        "assets/cv/Jingtao_Lei_CV.pdf": "assets/versioned/Jingtao_Lei_CV.39866a060528.pdf",
+        "assets/icons/apple-touch-icon.png": "assets/versioned/apple-touch-icon.38293605c8da.png",
+        "assets/icons/favicon-32-dark.png": "assets/versioned/favicon-32-dark.7bc1b4005945.png",
+        "assets/icons/favicon-32.png": "assets/versioned/favicon-32.5cf9cdb39e24.png",
+        "collection.js": "assets/versioned/collection.fa32c77ef6a9.js",
+        "connection-check.js": "assets/versioned/connection-check.24129e234b5b.js",
+        "favicon.ico": "assets/versioned/favicon.d0cf5d3b8be7.ico",
+        "favicon.svg": "assets/versioned/favicon.185fa6008c98.svg",
+        "interaction.js": "assets/versioned/interaction.109599f6aada.js",
+        "scene.js": "assets/versioned/scene.2eec20313c44.js",
+        "script.js": "assets/versioned/script.e6b4c24b2f19.js",
+        "styles.css": "assets/versioned/styles.aeeecbb695cc.css",
+        "surfaces.css": "assets/versioned/surfaces.88ffacb6d658.css",
+        "version-check.js": "assets/versioned/version-check.f85681bffdeb.js"
+      }
+    },
+    {
       "release": "a4232df5e88a",
       "commit": "dbdf985e1bbfc2cad5dd7132d47367fa94f46f0c",
       "retain_until": "2026-11-13",
