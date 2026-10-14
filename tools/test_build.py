@@ -8,6 +8,13 @@ from prepare_assets import prepare
 from build_site import build, protected_assets, archive_unused
 
 class Publishing(unittest.TestCase):
+    def test_single_active_collection_pipeline(self):
+        source = Path(__file__).resolve().parents[1]
+        for name in ('index.html', 'privacy.html'):
+            self.assertNotIn('beacon.min.js', (source / name).read_text())
+        self.assertIn("sendAnonymousEvent('page_view'", (source / 'script.js').read_text())
+        self.assertIn('jingtao-collection.pages.dev/event', (source / 'analytics-config.js').read_text())
+
     def test_retention_and_clean_output(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp) / 'site'

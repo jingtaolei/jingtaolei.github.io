@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="assets/versioned/apple-touch-icon.38293605c8da.png" sizes="180x180" />
   <link rel="stylesheet" href="assets/versioned/styles.aeeecbb695cc.css" />
   <link rel="stylesheet" href="assets/versioned/surfaces.88ffacb6d658.css" />
-  <meta name="site-release" content="66174b0046d9" />
+  <meta name="site-release" content="d8b19efdd00c" />
 </head>
 <body>
   <header class="site-header">
@@ -32,7 +32,7 @@
     <div class="shell privacy-content">
       <p class="section-kicker">Privacy</p>
       <div class="privacy-title"><h1>Privacy</h1><svg class="privacy-geometry" data-motion viewBox="0 0 100 100" fill="none" aria-hidden="true"><circle cx="50" cy="50" r="34" stroke="#aab69d" stroke-dasharray="2 5"/><path class="privacy-boundary" d="M50 20L73 30V51Q73 69 50 81Q27 69 27 51V30L50 20Z" stroke="#7c936d" stroke-width="1.2"/><path class="privacy-check" pathLength="1" d="M38 51L47 60L64 40" stroke="#6c8664" stroke-width="1.5"/></svg></div>
-      <p class="privacy-meta">Last updated: September 5, 2026</p>
+      <p class="privacy-meta">Last updated: October 14, 2026</p>
 
       <p>
         This is a personal academic website. It does not provide user accounts, advertising,
@@ -41,14 +41,17 @@
 
       <h2>Cloudflare analytics</h2>
       <p>
-        This site uses Cloudflare Web Analytics for aggregate traffic and website performance measurement.
-        Cloudflare states that Web Analytics does not use cookies to collect usage metrics and is designed
-        without cross-site tracking of individual visitors.
+        This site records anonymous website statistics through a Cloudflare Pages collection endpoint
+        and Workers Analytics Engine. Each event is sent to one verified endpoint; an existing Worker
+        endpoint can serve as a connection fallback and uses the same dataset.
       </p>
       <p>
-        The site also records a small set of anonymous interaction events through a Cloudflare Worker and
-        Workers Analytics Engine. These events include page views, visits to major sections, and clicks on
+        These statistics include page views, visits to major sections, and clicks on
         the CV, GitHub profile, project code, Publications navigation, and contact links.
+      </p>
+      <p>
+        New page loads no longer load the separate Cloudflare Web Analytics beacon. Previously collected
+        Web Analytics aggregates remain available to the site owner during Cloudflare's retention window.
       </p>
       <p>
         For these anonymous events, the site may store the event type, page path, referring website host,
@@ -94,6 +97,5 @@
   <script src="assets/versioned/collection.fa32c77ef6a9.js"></script>
   <script src="assets/versioned/script.e6b4c24b2f19.js"></script>
   <!-- Production analytics are disabled in local previews. -->
-  <script>if (!['localhost', '127.0.0.1', '[::1]'].includes(location.hostname)) { const beacon = document.createElement('script'); beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js'; beacon.dataset.cfBeacon = '{"token":"8a72ad30b9ee49d7b2c2c8fedf3841cb"}'; document.body.append(beacon); }</script>
 </body>
 </html>
