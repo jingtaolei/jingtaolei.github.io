@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="assets/versioned/apple-touch-icon.38293605c8da.png" sizes="180x180" />
   <link rel="stylesheet" href="assets/versioned/styles.aeeecbb695cc.css" />
   <link rel="stylesheet" href="assets/versioned/surfaces.88ffacb6d658.css" />
-  <meta name="site-release" content="d2d1ae0c90b2" />
+  <meta name="site-release" content="a4232df5e88a" />
 </head>
 <body>
   <header class="site-header">
@@ -57,6 +57,9 @@
         store the visitor's IP address, precise coordinates, postal code, full user-agent string, cookies,
         persistent visitor IDs, session IDs, email addresses, or browser fingerprints for this analytics system.
         Events are therefore not linked into individual visitor profiles or cross-visit histories.
+        Unsent events may be held only in the current page’s memory for up to two minutes while a
+        collection connection is unavailable; they are not saved in browser storage. Event times
+        reflect when the collector receives them.
       </p>
       <p>
         The site does not use Google Analytics, Microsoft Clarity, session recording, advertising trackers,
@@ -87,8 +90,9 @@
   <script src="assets/versioned/version-check.f85681bffdeb.js" defer></script>
   <script src="assets/versioned/scene.2eec20313c44.js"></script>
   <script src="assets/versioned/interaction.109599f6aada.js"></script>
-  <script src="assets/versioned/analytics-config.1a7031004ed6.js"></script>
-  <script src="assets/versioned/script.c45db7642634.js"></script>
+  <script src="assets/versioned/analytics-config.c1d68aa21328.js"></script>
+  <script src="assets/versioned/collection.8e3738aa74cf.js"></script>
+  <script src="assets/versioned/script.e6b4c24b2f19.js"></script>
   <!-- Production analytics are disabled in local previews. -->
   <script>if (!['localhost', '127.0.0.1', '[::1]'].includes(location.hostname)) { const beacon = document.createElement('script'); beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js'; beacon.dataset.cfBeacon = '{"token":"8a72ad30b9ee49d7b2c2c8fedf3841cb"}'; document.body.append(beacon); }</script>
 </body>

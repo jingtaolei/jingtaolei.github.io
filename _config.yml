@@ -17,6 +17,8 @@ exclude:
   - "script.js"
   - "version-check.js"
   - "analytics-config.js"
+  - "collection.js"
+  - "connection-check.js"
   - "favicon.svg"
   - "asset-manifest.json"
   - "site-build.json"
