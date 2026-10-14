@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import tempfile
 from urllib.parse import unquote, urlsplit
 
@@ -26,8 +27,11 @@ def write_atomic(path, data):
     os.replace(name, path)
 
 
-def prepare(root=ROOT, check=False):
+def prepare(root=ROOT, check=False, optimize=None):
     root = root.resolve()
+    if optimize is None:
+        config = root / 'site-build.json'
+        optimize = json.loads(config.read_text()).get('optimize', False) if config.exists() else False
     manifest_path = root / 'asset-manifest.json'
     previous = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
     aliases = dict(previous.get('aliases', {}))
@@ -66,7 +70,13 @@ def prepare(root=ROOT, check=False):
                 fragment = urlsplit(match[2]).fragment
                 return f'url("{Path(target).name}{"#" + fragment if fragment else ""}")'
             data = CSS_URL.sub(css_ref, data.decode('utf-8')).encode('utf-8')
-        target = f'assets/versioned/{path.stem}.{digest(data)}{path.suffix}'
+        if optimize and path.suffix in {'.css', '.js'}:
+            result = subprocess.run(['node', str(root / 'tools/minify.cjs'), path.suffix[1:]],
+                                    input=data, capture_output=True)
+            if result.returncode:
+                raise ValueError('Asset optimizer failed; run npm ci first: ' + result.stderr.decode())
+            data = result.stdout
+        target = f'assets/versioned/{path.stem}.{digest(data)}{path.suffix}' 
         current[source] = target
         aliases[target] = source
         output[target] = data

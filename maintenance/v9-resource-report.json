@@ -1,0 +1,12 @@
+{
+  "baseline_publish_tree_bytes": 7891490,
+  "lean_publication_bytes": 1249089,
+  "active_code_before_bytes": 64899,
+  "active_code_after_bytes": 53949,
+  "retained_release_ids": [
+    "1aba15d37f23",
+    "0c1011636363",
+    "b5ba4bec7e6c"
+  ],
+  "archived_design_bytes": 5552540
+}

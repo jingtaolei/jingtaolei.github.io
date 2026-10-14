@@ -7,7 +7,7 @@
 - Image source: https://commons.wikimedia.org/wiki/File:Claude_Monet_-_Cliff_Walk_at_Pourville_-_Google_Art_Project.jpg
 - Original image: https://upload.wikimedia.org/wikipedia/commons/a/a4/Claude_Monet_-_Cliff_Walk_at_Pourville_-_Google_Art_Project.jpg
 - Public domain reproduction; museum API also identifies the painting as public domain.
-- The retained reference is 1800 px wide. Version 3 loads a 1600 px JPEG optimized for web delivery (`monet-cliff-walk-web.jpg`), preserving the larger reference. CSS adds a muted colour treatment, regional blur and cream gradients. Geometric studies use lightweight SVG and CSS. No Canvas or continuous rendering loop is used. Version 7 also reuses faint, local fragments of this artwork in the About and research plates.
+- The original 1800 px reference is archived outside the website source. The page loads the unchanged 1600 px web JPEG (`monet-cliff-walk-web.jpg`). CSS adds a muted colour treatment, regional blur and cream gradients. Geometric studies use lightweight SVG and CSS. No Canvas or continuous rendering loop is used. Version 7 also reuses faint, local fragments of this artwork in the About and research plates.
 - No generated artwork is used.
 
 **Alfred Sisley — The Banks of the Oise, 1877/1878**
@@ -23,6 +23,6 @@
 - Source article and illustration: https://spice.eplus.jp/articles/232343
 - Image: https://spice.eplus.jp/images/L1Dwj9g5VP4ax3UbTBze7vZ63oM1rsoRhMbbbc5LOUBHiekxw3EiExSrxJ2tint0/
 - Drawing © Syd Mead, Inc.; Turn A Gundam © Sotsu / Sunrise. This is an existing artwork, not a generated image.
-- Used by the version 2 design study, preserved in its complete checkpoint. Version 3 does not load this illustration on the homepage; the original asset is retained for design research.
+- Used by the version 2 design study, preserved in its complete checkpoint. Version 3 does not load this illustration on the homepage; the original asset is archived outside the website source for design research.
 
-Additional comparison images in `design-notes/reference-images` are for design research and are not displayed as website artwork. See `design-notes/direction.md` for the observations and sources.
+The former `design-notes/` folder and unused references are preserved in the parent project’s `website-archive/v8-design-materials-2026-10-14/`. They are omitted from publication.

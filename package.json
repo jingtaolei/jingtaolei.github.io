@@ -1,0 +1,13 @@
+{
+  "name": "jingtao-personal-site",
+  "private": true,
+  "version": "9.0.0",
+  "scripts": {
+    "build": "python3 -B tools/prepare_assets.py && python3 -B tools/build_site.py",
+    "check": "python3 -B tools/prepare_assets.py --check && python3 -B tools/build_site.py --check",
+    "test": "python3 -B tools/test_assets.py && python3 -B tools/test_build.py && node tools/test_version_check.cjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1"
+  }
+}
