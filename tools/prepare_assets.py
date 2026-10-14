@@ -74,7 +74,7 @@ def prepare(root=ROOT, check=False):
         return target
 
     pages = {}
-    for name in ('index.html', 'privacy.html'):
+    for name in ('index.html', 'privacy.html', 'analytics-check.html'):
         text = RELEASE_META.sub('', (root / name).read_text())
         def html_ref(match):
             source = local_source(match[3], root)

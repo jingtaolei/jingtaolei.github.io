@@ -33,58 +33,55 @@ if (toggle && nav) {
   });
 }
 
-// Anonymous interaction analytics through a Cloudflare Worker + Analytics Engine.
-// Anonymous event endpoint hosted on Cloudflare Workers.
-const ANONYMOUS_ANALYTICS_ENDPOINT =
-  'https://jingtao-academic-analytics.leijingtao2005.workers.dev/event';
-
+// Anonymous collection: configure reachable production hosts in analytics-config.js.
+const ANONYMOUS_ANALYTICS_ENDPOINTS = (window.ANONYMOUS_ANALYTICS_ENDPOINTS || [
+  'https://jingtao-academic-analytics.leijingtao2005.workers.dev/event'
+]).filter(value => {
+  try { const url = new URL(value); return url.protocol === 'https:' && url.pathname === '/event' && !url.username && !url.password; }
+  catch { return false; }
+});
 const TRACKED_SECTIONS = ['research', 'publications', 'skills', 'awards', 'contact'];
-
+let selectedAnalyticsEndpoint;
 function analyticsEndpointReady() {
-  return (
-    !['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname) &&
-    ANONYMOUS_ANALYTICS_ENDPOINT.startsWith('https://') &&
-    !ANONYMOUS_ANALYTICS_ENDPOINT.includes('YOUR-WORKER-NAME') &&
-    !ANONYMOUS_ANALYTICS_ENDPOINT.includes('YOUR-SUBDOMAIN')
-  );
+  return !['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname) && ANONYMOUS_ANALYTICS_ENDPOINTS.length > 0;
 }
-
 function currentReferrerHost() {
   if (!document.referrer) return 'direct';
-  try {
-    return new URL(document.referrer).hostname || 'direct';
-  } catch (_) {
-    return 'unknown';
-  }
+  try { return new URL(document.referrer).hostname || 'direct'; }
+  catch { return 'unknown'; }
 }
-
-function sendAnonymousEvent(eventName, context = '') {
+async function chooseAnalyticsEndpoint() {
+  // Probe only when alternatives are configured. A probe never records a visit.
+  // Select one reachable host before POST, avoiding a replay after an ambiguous
+  // acknowledgement (which could otherwise double-count the same event).
+  if (ANONYMOUS_ANALYTICS_ENDPOINTS.length === 1) return ANONYMOUS_ANALYTICS_ENDPOINTS[0];
+  for (const endpoint of ANONYMOUS_ANALYTICS_ENDPOINTS) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 2500);
+    try {
+      const response = await fetch(new URL('/health', endpoint), {mode:'cors',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',signal:controller.signal});
+      if (response.ok && (await response.json()).ok) return endpoint;
+    } catch (_) {} finally { clearTimeout(timer); }
+  }
+  return null;
+}
+async function sendAnonymousEvent(eventName, context = '') {
   if (!analyticsEndpointReady()) return;
-
-  const payload = {
-    event: eventName,
-    page: window.location.pathname || '/',
-    referrer_host: currentReferrerHost(),
-    context
-  };
-
-  // The request contains no cookie, visitor ID, session ID, email address,
-  // destination URL, or browser fingerprint. keepalive improves delivery when
-  // a click immediately navigates away.
-  fetch(ANONYMOUS_ANALYTICS_ENDPOINT, {
-    method: 'POST',
-    mode: 'cors',
-    credentials: 'omit',
-    cache: 'no-store',
-    keepalive: true,
-    referrerPolicy: 'no-referrer',
-    headers: {
-      'Content-Type': 'text/plain;charset=UTF-8'
-    },
-    body: JSON.stringify(payload)
-  }).catch(() => {
-    // Analytics must never interfere with normal site behavior.
-  });
+  try {
+    selectedAnalyticsEndpoint ||= chooseAnalyticsEndpoint();
+    const endpoint = await selectedAnalyticsEndpoint;
+    if (!endpoint) { selectedAnalyticsEndpoint = null; return; }
+    const response = await fetch(endpoint, {
+      method:'POST',mode:'cors',credentials:'omit',cache:'no-store',keepalive:true,
+      referrerPolicy:'no-referrer',headers:{'Content-Type':'text/plain;charset=UTF-8'},
+      body:JSON.stringify({event:eventName,page:window.location.pathname||'/',referrer_host:currentReferrerHost(),context})
+    });
+    if (!response.ok) selectedAnalyticsEndpoint = null;
+  } catch (_) {
+    // Failures must not affect navigation. Reselect the endpoint for later
+    // events, but never replay this request: a network error can follow a write.
+    selectedAnalyticsEndpoint = null;
+  }
 }
 
 // One anonymous page-view event per page load. This is intentionally not tied

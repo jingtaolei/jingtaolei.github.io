@@ -13,7 +13,7 @@ class Releases(unittest.TestCase):
             (root / 'art/paint.jpg').write_bytes(b'first painting')
             (root / 'style.css').write_text("body { background: url('art/paint.jpg'); }")
             page = '<head><link href="style.css"></head><a href="#research">Research</a>'
-            for name in ('index.html', 'privacy.html'):
+            for name in ('index.html', 'privacy.html', 'analytics-check.html'):
                 (root / name).write_text(page)
             first, assets = prepare(root)
             old_html = (root / 'index.html').read_bytes()

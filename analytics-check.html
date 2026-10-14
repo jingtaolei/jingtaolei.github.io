@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>采集连接检查 · Jingtao Lei</title><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{font:14px/1.8 'Avenir Next','Source Han Sans CN','PingFang SC','Microsoft YaHei',sans-serif;color:#293d32;background:#f8f7ef;margin:0}main{width:min(800px,calc(100% - 36px));margin:65px auto}h1{font:42px/1.2 Georgia,'Source Han Serif CN','Songti SC',serif;font-weight:400}a{color:#4b6652}.card{padding:24px;border:1px solid #fffdf1;border-radius:4px 20px 4px 20px;background:linear-gradient(130deg,#fafbf1b8,#edf2e56b);margin:22px 0}button{font:inherit;border:1px solid #9fae92;padding:10px 20px;border-radius:3px 12px 3px 12px;background:#4b6652;color:#fafbf0;cursor:pointer;min-height:44px}button:disabled{opacity:.6}small,.muted{color:#657364}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eef1e5;padding:18px;font:12px/1.8 monospace}li{margin-bottom:10px}h2{font-size:17px}button+button{background:transparent;color:#4b6652;margin-left:10px}:focus-visible{outline:2px solid #647c50;outline-offset:5px}</style>
+  <meta name="site-release" content="1aba15d37f23" />
+</head><body><main><a href="index.html">← 返回个人网站</a><p class="muted">A PERSONAL OBSERVATORY / CONNECTION CHECK</p><h1>采集连接检查</h1><p>请在发生漏记的设备和网络上运行。此页不加载访问统计，不写入事件，也不要求定位权限。结果只显示在本页。</p><div class="card"><label for="network">当前网络情况（只用于结果说明）</label><p><select id="network" style="font:inherit;padding:8px;background:#f8f7ef;border:1px solid #a6b59b"><option>普通网络，无 VPN</option><option>VPN / 代理已开启</option><option>不确定</option></select></p><button id="run">开始检查</button><button id="copy" disabled>复制结果</button><p id="status" role="status" aria-live="polite">尚未运行。</p><pre id="result" hidden></pre></div><div class="card"><h2>如何理解结果</h2><ul><li><strong>连接成功：</strong>这台设备可以访问采集服务。国家代码来自 Cloudflare 识别的网络出口；CN 表示中国大陆。VPN 开启时可能显示其他国家。</li><li><strong>超时 / 连接失败：</strong>采集域名的 DNS、网络路由、防火墙或浏览器扩展可能阻止了请求。个人网站能打开，并不意味着采集域名可连接。</li><li><strong>登录页 / 重定向 / 非 JSON：</strong>检查 Cloudflare Access 是否只保护了 /dashboard*，不要保护 /event 和 /health。</li><li><strong>404 或旧版本：</strong>Worker 可能还没有部署本次更新。请先更新 Worker 后再测试。</li></ul><p class="muted">检查成功也会验证 /event 的 POST 请求，但不会写入事件。随后打开个人首页，在监测站 Events 中核对相近时间、国家和 page_view。仍没有记录时，检查扩展、/event 的响应和 Cloudflare 规则。</p></div></main><script src="assets/versioned/analytics-config.00727c7b884e.js"></script><script>
+const run=document.querySelector('#run'),copy=document.querySelector('#copy'),result=document.querySelector('#result'),status=document.querySelector('#status');
+let report='';
+run.addEventListener('click',async()=>{
+ run.disabled=true;copy.disabled=true;status.textContent='正在检查采集地址…';result.hidden=true;
+ const checks=[];
+ for(const endpoint of window.ANONYMOUS_ANALYTICS_ENDPOINTS||[]){
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000),start=performance.now();
+  try{
+   const response=await fetch(new URL('/health',endpoint),{mode:'cors',credentials:'omit',cache:'no-store',redirect:'error',referrerPolicy:'no-referrer',signal:controller.signal});
+   const type=response.headers.get('content-type')||'';
+   let data=null;if(type.includes('application/json'))data=await response.json();
+   let post=null;
+   if(data?.ok){
+    const postURL=new URL(endpoint);postURL.searchParams.set('check','1');
+    const validation=await fetch(postURL,{method:'POST',mode:'cors',credentials:'omit',cache:'no-store',redirect:'error',referrerPolicy:'no-referrer',signal:controller.signal,headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({event:'page_view',page:'/analytics-check.html',context:'connection-check'})});
+    post=validation.headers.get('content-type')?.includes('application/json')?await validation.json():{ok:false,status:validation.status};
+   }
+   checks.push({endpoint,status:response.status,milliseconds:Math.round(performance.now()-start),success:!!data?.ok&&!!post?.ok,health:!!data?.ok,post_validation:post,version:data?.version||null,country:data?.country||null,browser:data?.browser||null,os:data?.os||null,note:data?'已检测连接与 POST 路径，未写入事件。':'不是 JSON 响应，可能是旧 Worker、登录保护或错误页面。'});
+  }catch(error){checks.push({endpoint,success:false,milliseconds:Math.round(performance.now()-start),note:error.name==='AbortError'?'8 秒内没有响应。':'连接失败（网络、跨域、扩展或登录重定向均可能导致）。'});}finally{clearTimeout(timer);}
+ }
+ report=JSON.stringify({checked_at:new Date().toISOString(),network:document.querySelector('#network').value,checks},null,2);
+ result.textContent=report;result.hidden=false;status.textContent=checks.some(c=>c.success)?'至少一个采集地址连接成功。请再核对实际 page_view。':'采集地址未通过检查，结果如下。';run.disabled=false;copy.disabled=false;
+});
+copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(report);status.textContent='结果已复制，可发给网站维护者。';}catch{status.textContent='浏览器不允许复制，请手动复制下方结果。';}});
+</script></body></html>
