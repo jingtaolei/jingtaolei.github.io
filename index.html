@@ -16,8 +16,8 @@
   <link rel="apple-touch-icon" href="assets/versioned/apple-touch-icon.38293605c8da.png" sizes="180x180" />
   <link rel="preload" as="image" href="assets/versioned/monet-cliff-walk-web.3e37091a1837.jpg" />
   <link rel="stylesheet" href="assets/versioned/styles.aeeecbb695cc.css" />
-  <link rel="stylesheet" href="assets/versioned/surfaces.88ffacb6d658.css" />
-  <meta name="site-release" content="6e6c06d4fd9c" />
+  <link rel="stylesheet" href="assets/versioned/surfaces.75d2f5e8ec51.css" />
+  <meta name="site-release" content="e2408bf8a93e" />
 </head>
 <body class="home">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -43,7 +43,12 @@
       <div class="landscape" aria-hidden="true"><div class="landscape-painting"></div><div class="landscape-softness"></div></div>
       <div class="shell hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="tiny-cross" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M12 3V21M3 12H21M5.6 5.6L18.4 18.4M5.6 18.4L18.4 5.6"/></svg></span> APPLIED MATHEMATICS &amp; AI RESEARCH</p>
+          <div class="hero-eyebrow-row">
+            <a class="hero-portrait" href="#about" aria-label="About Jingtao Lei">
+              <img src="assets/versioned/jingtao-lei.09918b758438.jpg" width="675" height="900" alt="" decoding="async" />
+            </a>
+            <p class="eyebrow"><span class="tiny-cross" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M12 3V21M3 12H21M5.6 5.6L18.4 18.4M5.6 18.4L18.4 5.6"/></svg></span> APPLIED MATHEMATICS &amp; AI RESEARCH</p>
+          </div>
           <h1 id="hero-title">Jingtao <em>Lei.</em></h1>
           <p class="hero-thought">Seeing the world.<br>Learning what lies <em>beyond.</em></p>
           <p class="hero-lead">I explore how multimodal and generative models can move beyond visual generation toward a richer understanding of the physical world.</p>
@@ -80,11 +85,33 @@
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="shell two-col">
-        <div>
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="shell about-layout">
+        <header class="about-heading">
           <p class="section-kicker"><span>01 /</span> A LITTLE ABOUT ME</p>
-          <h2>Curiosity, grounded<br>in <em>mathematics.</em></h2><div class="about-study" tabindex="0" role="group" aria-label="Mathematical basis study"><svg class="about-geometry" data-motion viewBox="0 0 420 120" fill="none" aria-hidden="true">
+          <h2 id="about-title">Curiosity, grounded<br>in <em>mathematics.</em></h2>
+        </header>
+        <figure class="about-portrait">
+          <div class="portrait-mount">
+            <span class="portrait-glass" aria-hidden="true"></span>
+            <div class="portrait-image">
+              <img src="assets/versioned/jingtao-lei.09918b758438.jpg" width="675" height="900" alt="Portrait of Jingtao Lei" loading="lazy" decoding="async" />
+            </div>
+            <svg class="portrait-register" viewBox="0 0 320 440" fill="none" aria-hidden="true"><path d="M6 67V8H65M251 432H310V373"/><path class="portrait-register-line" d="M6 97V67M221 432H251"/><circle cx="6" cy="8" r="2"/></svg>
+          </div>
+          <figcaption><span>Jingtao <em>Lei.</em></span><small>MATHEMATICS &amp; AI RESEARCH</small></figcaption>
+        </figure>
+        <div class="prose"><p class="about-intro">From patterns to perception.<br>From generation to understanding.</p>
+          <p>
+            I am an Applied Mathematics undergraduate in the Dundee International Institute at Central South University, studying in a dual-degree programme with the University of Dundee. Upon successful completion, I expect to receive bachelor’s degrees from both institutions. I have hands-on research experience in multimodal learning and video diffusion models.
+          </p>
+          <p>
+            My current work investigates whether pretrained video diffusion models encode usable
+            physical dynamics, and how those internal representations might support future
+            world-model capabilities. Previously, I developed a layer-wise gate-controlled prompt
+            truncation mechanism for parameter-efficient multimodal learning, now available as an arXiv preprint.
+          </p>
+        <div class="about-study" tabindex="0" role="group" aria-label="Mathematical basis study"><svg class="about-geometry" data-motion viewBox="0 0 420 120" fill="none" aria-hidden="true">
             <g stroke="#a0ab90" stroke-width=".8"><path d="M30 92H164M48 104V15M242 92H398M258 104V15"/></g>
             <g stroke="#9eae8c" stroke-width=".7"><path d="M48 28H144M48 60H144M80 28V92M112 28V92M144 28V92"/></g>
             <path d="M48 28H112V92H48Z" fill="#d6debf" fill-opacity=".14" stroke="#6c8562" stroke-width="1.2"/>
@@ -100,17 +127,6 @@
             </g>
             <g fill="#6c8562"><path d="M44 92L48 88L52 92L48 96Z"/><path d="M254 92L258 88L262 92L258 96Z"/></g>
           </svg></div>
-        </div>
-        <div class="prose"><p class="about-intro">From patterns to perception.<br>From generation to understanding.</p>
-          <p>
-            I am an Applied Mathematics undergraduate in the Dundee International Institute at Central South University, studying in a dual-degree programme with the University of Dundee. Upon successful completion, I expect to receive bachelor’s degrees from both institutions. I have hands-on research experience in multimodal learning and video diffusion models.
-          </p>
-          <p>
-            My current work investigates whether pretrained video diffusion models encode usable
-            physical dynamics, and how those internal representations might support future
-            world-model capabilities. Previously, I developed a layer-wise gate-controlled prompt
-            truncation mechanism for parameter-efficient multimodal learning, now available as an arXiv preprint.
-          </p>
         </div>
       </div>
     </section>

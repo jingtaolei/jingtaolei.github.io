@@ -14,12 +14,13 @@ from prepare_assets import ROOT, prepare, CSS_URL, write_atomic
 PAGES = ('index.html', 'privacy.html', 'analytics-check.html')
 FINGERPRINT = re.compile(r'^assets/versioned/[\w.-]+\.[a-f0-9]{12}\.[\w]+$')
 EXCLUDES = ['README.md', 'maintenance', 'design-notes', 'tools', 'cloudflare-worker',
-            'node_modules', 'dist', 'assets/art', 'assets/icons', 'assets/cv',
+            'node_modules', 'dist', 'assets/art', 'assets/icons', 'assets/cv', 'assets/portraits',
             'styles.css', 'surfaces.css', 'scene.js', 'interaction.js', 'script.js',
             'version-check.js', 'analytics-config.js', 'collection.js', 'connection-check.js', 'favicon.svg',
             'asset-manifest.json', 'site-build.json', 'package.json', 'package-lock.json',
             '.sass-cache', '.jekyll-cache', 'Gemfile', 'Gemfile.lock', 'vendor',
-            '**/__pycache__', '**/*.pyc', '**/.DS_Store']
+            '**/__pycache__', '**/*.pyc', '**/.DS_Store',
+            'VERSION.json', 'VERSION.md', 'evidence', 'context']
 
 
 def protected_assets(root=ROOT, today=None):

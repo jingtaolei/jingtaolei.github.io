@@ -17,6 +17,7 @@
     "assets/versioned/favicon.d0cf5d3b8be7.ico": "favicon.ico",
     "assets/versioned/interaction.109599f6aada.js": "interaction.js",
     "assets/versioned/interaction.edea5f417217.js": "interaction.js",
+    "assets/versioned/jingtao-lei.09918b758438.jpg": "assets/portraits/jingtao-lei.jpg",
     "assets/versioned/monet-cliff-walk-web.3e37091a1837.jpg": "assets/art/monet-cliff-walk-web.jpg",
     "assets/versioned/scene.2eec20313c44.js": "scene.js",
     "assets/versioned/scene.af2ea2c0c840.js": "scene.js",
@@ -31,6 +32,7 @@
     "assets/versioned/styles.aeeecbb695cc.css": "styles.css",
     "assets/versioned/surfaces.33537d3723cf.css": "surfaces.css",
     "assets/versioned/surfaces.4ddaf43f67e4.css": "surfaces.css",
+    "assets/versioned/surfaces.75d2f5e8ec51.css": "surfaces.css",
     "assets/versioned/surfaces.88ffacb6d658.css": "surfaces.css",
     "assets/versioned/version-check.f85681bffdeb.js": "version-check.js",
     "assets/versioned/version-check.fe899418c000.js": "version-check.js"
@@ -43,6 +45,7 @@
     "assets/icons/apple-touch-icon.png": "assets/versioned/apple-touch-icon.38293605c8da.png",
     "assets/icons/favicon-32-dark.png": "assets/versioned/favicon-32-dark.7bc1b4005945.png",
     "assets/icons/favicon-32.png": "assets/versioned/favicon-32.5cf9cdb39e24.png",
+    "assets/portraits/jingtao-lei.jpg": "assets/versioned/jingtao-lei.09918b758438.jpg",
     "collection.js": "assets/versioned/collection.fa32c77ef6a9.js",
     "connection-check.js": "assets/versioned/connection-check.24129e234b5b.js",
     "favicon.ico": "assets/versioned/favicon.d0cf5d3b8be7.ico",
@@ -51,8 +54,8 @@
     "scene.js": "assets/versioned/scene.2eec20313c44.js",
     "script.js": "assets/versioned/script.e6b4c24b2f19.js",
     "styles.css": "assets/versioned/styles.aeeecbb695cc.css",
-    "surfaces.css": "assets/versioned/surfaces.88ffacb6d658.css",
+    "surfaces.css": "assets/versioned/surfaces.75d2f5e8ec51.css",
     "version-check.js": "assets/versioned/version-check.f85681bffdeb.js"
   },
-  "release": "6e6c06d4fd9c"
+  "release": "e2408bf8a93e"
 }
