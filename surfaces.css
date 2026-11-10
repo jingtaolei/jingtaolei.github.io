@@ -64,6 +64,14 @@
 .publication::before { content: ''; position: absolute; z-index: -1; inset: -1px -24px; background: linear-gradient(120deg,#f4f7ecb5,#ecf1e438,transparent); border-radius: var(--surface-curve); opacity: 0; transition: opacity .55s ease; pointer-events: none; }
 .publication:is(:hover,:focus-within)::before { opacity: 1; }
 .paper-number { padding-top: 6px; }
+/* Small scholarly annotations share the existing palette and typography. */
+.corresponding-marker { margin-left: 2px; line-height: 0; }
+.corresponding-marker svg, .corresponding-note svg { fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; }
+.publication .corresponding-note { font-size: 10px; margin-bottom: 12px; }
+.corresponding-note svg { vertical-align: .05em; margin-right: 3px; }
+.publication .publication-note { max-width: 650px; font: italic 16px/1.65 var(--serif); margin-top: 16px; }
+.supervisor a { color: inherit; border-bottom: 1px solid #a8b79a55; }
+.supervisor a:hover { color: var(--accent); border-bottom-color: currentColor; }
 .paper-geometry { margin-top: 22px; }
 .skills-grid { gap: 32px; }
 .skill-card { isolation: isolate; padding-top: 23px; border-top-color: #adbea253; }
