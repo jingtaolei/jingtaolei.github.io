@@ -2,6 +2,7 @@
   "aliases": {
     "assets/versioned/Jingtao_Lei_CV.39866a060528.pdf": "assets/cv/Jingtao_Lei_CV.pdf",
     "assets/versioned/Jingtao_Lei_CV.8e5740a43be9.pdf": "assets/cv/Jingtao_Lei_CV.pdf",
+    "assets/versioned/Jingtao_Lei_CV.8f395377c86d.pdf": "assets/cv/Jingtao_Lei_CV.pdf",
     "assets/versioned/Jingtao_Lei_CV.d63901dc867a.pdf": "assets/cv/Jingtao_Lei_CV.pdf",
     "assets/versioned/analytics-config.00727c7b884e.js": "analytics-config.js",
     "assets/versioned/analytics-config.1a7031004ed6.js": "analytics-config.js",
@@ -41,7 +42,7 @@
     "analytics-config.js": "assets/versioned/analytics-config.c1d68aa21328.js",
     "assets/art/monet-cliff-walk-web.jpg": "assets/versioned/monet-cliff-walk-web.3e37091a1837.jpg",
     "assets/art/sisley-banks-oise.jpg": "assets/versioned/sisley-banks-oise.fdcf64ba2799.jpg",
-    "assets/cv/Jingtao_Lei_CV.pdf": "assets/versioned/Jingtao_Lei_CV.d63901dc867a.pdf",
+    "assets/cv/Jingtao_Lei_CV.pdf": "assets/versioned/Jingtao_Lei_CV.8f395377c86d.pdf",
     "assets/icons/apple-touch-icon.png": "assets/versioned/apple-touch-icon.38293605c8da.png",
     "assets/icons/favicon-32-dark.png": "assets/versioned/favicon-32-dark.7bc1b4005945.png",
     "assets/icons/favicon-32.png": "assets/versioned/favicon-32.5cf9cdb39e24.png",
@@ -57,5 +58,5 @@
     "surfaces.css": "assets/versioned/surfaces.75d2f5e8ec51.css",
     "version-check.js": "assets/versioned/version-check.f85681bffdeb.js"
   },
-  "release": "e2408bf8a93e"
+  "release": "3a264b20288d"
 }
